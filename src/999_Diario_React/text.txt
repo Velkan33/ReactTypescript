@@ -1,0 +1,29 @@
+tsx sacar un como evaluariamos que un interface correspondiera a una variable
+
+hacer un  hook personalizado para realizar peticiones a una API
+
+crea un reloj digital usando useEffect
+
+hacer una peticion asincrona usando el useEffect
+
+usar el useEffect para contentDidMount componentDidUpdate componentWillUnmount
+
+crea un menu hamburguesa usando referencias
+
+
+Notes:
+
+//Forward ref to pass a ref through Components
+REF
+
+forwardRef((props,ref)=>{
+  useImperativeHandle(ref,()=>({
+  })
+ )
+
+
+})
+
+//To update the DOM after execute the code inside
+flushSync(() => {})
+
