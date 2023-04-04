@@ -1036,6 +1036,10 @@ video {
   grid-auto-flow: row;
 }
 
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1108,8 +1112,16 @@ video {
   gap: min(8vw,133px);
 }
 
+.place-self-end {
+  place-self: end;
+}
+
 .place-self-center {
   place-self: center;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .justify-self-center {
@@ -1501,6 +1513,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.align-bottom {
+  vertical-align: bottom;
 }
 
 .font-\[\'Permanent_Marker\'\2c _cursive\] {

@@ -7,7 +7,7 @@ export default function UserCard({ data }: { data: SubResponse }) {
   <div className="grid grid-flow-col h-40 border w-[20rem] mx-auto">
    <img src="" alt="userImg" />
    <div className="grid place-items-center">
-    <p className="">{firstName}</p>
+    <p className="align-self-bottom">{firstName}</p>
     <p>user</p>
    </div>{' '}
   </div>

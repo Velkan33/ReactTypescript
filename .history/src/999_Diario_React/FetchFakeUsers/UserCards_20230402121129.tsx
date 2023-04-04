@@ -8,7 +8,7 @@ function elementIsSubresponseArr(el: [] | SubResponse[]): el is SubResponse[] {
 }
 
 export default function UserCards() {
- // const [responseArray] = useMyFetch({ limit: 25, skip: 0 });
+ const [responseArray] = useMyFetch({ limit: 25, skip: 0 });
 
  if (!elementIsSubresponseArr(responseArray)) return <div>NoResponse</div>;
  return (
