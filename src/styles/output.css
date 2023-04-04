@@ -867,8 +867,8 @@ video {
   width: 1.5rem;
 }
 
-.w-\[10rem\] {
-  width: 10rem;
+.w-\[20rem\] {
+  width: 20rem;
 }
 
 .w-\[58\%\] {
@@ -916,8 +916,16 @@ video {
   width: 100vw;
 }
 
-.w-\[20rem\] {
-  width: 20rem;
+.w-16 {
+  width: 4rem;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[100\%\] {
+  width: 100%;
 }
 
 .min-w-\[10rem\] {
@@ -1032,6 +1040,10 @@ video {
   list-style-type: disc;
 }
 
+.auto-cols-fr {
+  grid-auto-columns: minmax(0, 1fr);
+}
+
 .grid-flow-row {
   grid-auto-flow: row;
 }
@@ -1112,16 +1124,12 @@ video {
   gap: min(8vw,133px);
 }
 
-.place-self-end {
-  place-self: end;
+.gap-0 {
+  gap: 0px;
 }
 
 .place-self-center {
   place-self: center;
-}
-
-.self-end {
-  align-self: flex-end;
 }
 
 .justify-self-center {
@@ -1380,6 +1388,11 @@ video {
   --tw-gradient-to: #7c3aed;
 }
 
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1513,10 +1526,6 @@ video {
 
 .text-center {
   text-align: center;
-}
-
-.align-bottom {
-  vertical-align: bottom;
 }
 
 .font-\[\'Permanent_Marker\'\2c _cursive\] {
