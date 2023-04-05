@@ -4,8 +4,9 @@ export default function LoginCard() {
  return (
   <div className="bg-white text-gray-800 p-8">
    <form className="grid gap-4">
-    <input type="text" className="rounded-full border" />
-    <input type="text" className="border rounded-full" />
+    <input type="text" className="border rounded-full w-full bg-white pl-2" />
+
+    <input type="text" className="border py-2 rounded-full w-full" />
     <input
      type="submit"
      value="Create Account"
