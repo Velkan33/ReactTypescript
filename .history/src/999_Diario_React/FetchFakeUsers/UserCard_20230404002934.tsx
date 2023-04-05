@@ -56,7 +56,7 @@ export default function UserCard({ data }: { data: SubResponse }) {
    <div className="overflow-hidden">
     <img className="w-full " src={image} alt="userImg" />
    </div>
-   <div className="grid place-items-center border-l border-gray-400/50">
+   <div className="grid place-items-center border-l border-gray-400">
     <p className="">{firstName}</p>
     <p>{username}</p>
    </div>{' '}

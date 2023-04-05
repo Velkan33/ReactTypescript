@@ -53,10 +53,10 @@ export default function UserCard({ data }: { data: SubResponse }) {
    className="grid grid-flow-col auto-cols-fr h-40 border w-[20rem] mx-auto"
    ref={lastElement ? ref : null}
   >
-   <div className="overflow-hidden">
+   <div className="">
     <img className="w-full " src={image} alt="userImg" />
    </div>
-   <div className="grid place-items-center border-l border-gray-400/50">
+   <div className="grid place-items-center">
     <p className="">{firstName}</p>
     <p>{username}</p>
    </div>{' '}
