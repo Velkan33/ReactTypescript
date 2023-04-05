@@ -1,5 +1,4 @@
 import React from 'react';
-import useMyFetch from './useMyFetch';
 import UserCard from './UserCard';
 import { useMyState } from './ContextReducer';
 import Message from './ErrorMessage';
@@ -17,9 +16,10 @@ function elementIsSubresponseArr(el: [] | SubResponse[]): el is SubResponse[] {
 
 export default function UserCards() {
  const MyState = useMyState();
- if (MyState === null) return <Message msg="MyState is Null" />;
  const responseArray = MyState.data;
- if (!elementIsSubresponseArr(responseArray)) return <div>NoResponse</div>;
+ if (MyState === null) return <Message msg="MyState is Null" />;
+ if (!elementIsSubresponseArr(responseArray))
+  return <Message msg="No response" />;
  return (
   <div className=" grid gap-8 py-8">
    {responseArray.map((el) => {

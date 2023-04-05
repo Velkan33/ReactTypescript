@@ -1,10 +1,4 @@
-import React, {
- createContext,
- useContext,
- useEffect,
- useReducer,
- useState,
-} from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { useImmerReducer } from 'use-immer';
 import useMyFetch from './useMyFetch';
 
@@ -47,13 +41,7 @@ function MyReducer(draft: MyStateType, action: ActionType) {
     draftCopy.data = [...draft.data, ...action.data];
    }
    break;
-  case 'More':
-   {
-    const draftCopy = draft;
-    if (!action.data) break;
-    draftCopy.data = [...draft.data, ...action.data];
-   }
-   break;
+
   default:
    break;
  }
