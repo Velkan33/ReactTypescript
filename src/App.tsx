@@ -2,16 +2,17 @@ import React from 'react';
 
 import UserFetchApp from './999_Diario_React/DummyJSONFetchUsers/UserFetchApp';
 import LogginApp from './999_Diario_React/DummyJSONLoggin/LoginApp';
+import DummyShopApp from './999_Diario_React/DummyOnlineShop/DummyShopApp';
 
 function App() {
  const SongFinderStyle =
-  'h-full w-full bg-gradient-to-l from-blue-600 to-violet-600 text-white';
+  'min-h-screen w-full bg-gradient-to-l from-blue-400 to-violet-400 text-black font-bold';
  return (
   <div className={SongFinderStyle}>
    {/* <CrudApi5A /> */}
    {/* <SongSearch /> */}
    {/* <UserFetchApp /> */}
-   <LogginApp />
+   <DummyShopApp />
   </div>
  );
 }
