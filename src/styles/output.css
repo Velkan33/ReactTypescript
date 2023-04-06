@@ -839,6 +839,14 @@ video {
   height: 100vh;
 }
 
+.h-3 {
+  height: 0.75rem;
+}
+
+.h-\[50px\] {
+  height: 50px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -922,6 +930,14 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.w-\[50px\] {
+  width: 50px;
 }
 
 .min-w-\[10rem\] {
@@ -1034,6 +1050,12 @@ video {
 
 .list-disc {
   list-style-type: disc;
+}
+
+.appearance-none {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .auto-cols-fr {
@@ -1186,6 +1208,11 @@ video {
 
 .border-gray-400\/50 {
   border-color: rgb(156 163 175 / 0.5);
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .\!bg-cyan-600 {
@@ -1430,6 +1457,10 @@ video {
 
 .p-\[10\%\] {
   padding: 10%;
+}
+
+.p-\[1px\] {
+  padding: 1px;
 }
 
 .px-1 {
@@ -1795,6 +1826,63 @@ video {
 .placeholder\:text-white::placeholder {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.after\:m-\[8px\]::after {
+  content: var(--tw-content);
+  margin: 8px;
+}
+
+.after\:block::after {
+  content: var(--tw-content);
+  display: block;
+}
+
+.after\:h-\[50px\]::after {
+  content: var(--tw-content);
+  height: 50px;
+}
+
+.after\:w-\[50px\]::after {
+  content: var(--tw-content);
+  width: 50px;
+}
+
+@keyframes spin {
+  to {
+    content: var(--tw-content);
+    transform: rotate(360deg);
+  }
+}
+
+.after\:animate-spin::after {
+  content: var(--tw-content);
+  animation: spin 1s linear infinite;
+}
+
+.after\:rounded-\[50\%\]::after {
+  content: var(--tw-content);
+  border-radius: 50%;
+}
+
+.after\:content-\[\'_\'\]::after {
+  --tw-content: ' ';
+  content: var(--tw-content);
+}
+
+.after\:\[border-color\:\#5c36f8_transparent_\#5c36f8_transparent\]::after {
+  content: var(--tw-content);
+  border-color: #5c36f8 transparent #5c36f8 transparent;
+}
+
+.after\:\[border\:6px_solid_\#5c36f8\]::after {
+  content: var(--tw-content);
+  border: 6px solid #5c36f8;
+}
+
+.checked\:bg-lime-500:checked {
+  --tw-bg-opacity: 1;
+  background-color: rgb(132 204 22 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-\[\#bf408080\]:hover {
