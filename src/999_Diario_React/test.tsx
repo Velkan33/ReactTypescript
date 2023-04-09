@@ -5,18 +5,18 @@ export function Test() {
   width: number | string;
  }
 
- type Res = "url" | "height" | "width";
+ type Res = 'url' | 'height' | 'width';
 
  let image: Record<Res, string | number> = {
-  url: "hola",
+  url: 'hola',
   height: 4,
-  width: "small",
+  width: 'small',
  };
 
  //is - satisfies - Record - Partial - Omit
 
- let random: Omit<Image, "width" | "height"> = {
-  url: "nat",
+ let random: Omit<Image, 'width' | 'height'> = {
+  url: 'nat',
  };
 
  interface Tor {
@@ -26,9 +26,9 @@ export function Test() {
  }
 
  let obj = {
-  name: "ken",
+  name: 'ken',
   id: 4,
-  color: "hel",
+  color: 'hel',
  };
 
  return <></>;
