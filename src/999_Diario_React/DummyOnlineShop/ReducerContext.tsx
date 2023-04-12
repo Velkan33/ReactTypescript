@@ -2,12 +2,14 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 type StateType = {
  categories: string[];
+ menuOpen: null | number;
 };
 type Action = {
  type: string;
- data: string[];
+ data?: string[];
+ value?: number;
 };
-const initialState = { categories: [] };
+const initialState = { categories: [], menuOpen: null };
 
 const MyState = createContext<null | StateType>(null);
 const MyDispatch = createContext<null | React.Dispatch<Action>>(null);
@@ -18,8 +20,11 @@ export const useMyDispatch = () => useContext(MyDispatch);
 function reducer(state: StateType, action: Action) {
  switch (action.type) {
   case 'ADD_CATEGORIES':
+   if (!action.data) return state;
    return { ...state, categories: action.data };
-
+  case 'SET_MENU_OPEN':
+   if (typeof action.value !== 'number') return state;
+   return { ...state, menuOpen: action.value };
   default:
    return state;
  }

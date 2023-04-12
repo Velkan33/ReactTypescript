@@ -1,33 +1,41 @@
-import React, { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import MenuOne from './MenuOne';
+import { useMyDispatch, useMyState } from '../ReducerContext';
+import MenuTwoTest from './MenuTwoTest';
 
 export default function MenuBarButton({
  textContent,
- data,
- menuOpen,
- setMenuOpen,
  id,
 }: {
  textContent: string;
- data?: string[];
- menuOpen: number;
- setMenuOpen: React.Dispatch<number>;
+
  id: number;
 }) {
+ const state = useMyState();
+ const dispatch = useMyDispatch();
+
  useEffect(() => {
   function MyEvent(e: MouseEvent) {
    const { target } = e;
-   if ((target as HTMLButtonElement).dataset.id === 'menuButton') return;
-   setMenuOpen(0);
+   console.log((target as HTMLButtonElement).dataset.id === 'grayArea');
+   console.log(target);
+   if (
+    (target as HTMLButtonElement).dataset.id === 'grayArea' &&
+    dispatch !== null
+   ) {
+    dispatch({ type: 'SET_MENU_OPEN', value: 0 });
+   }
   }
   document.addEventListener('click', MyEvent);
 
   return () => {
    document.removeEventListener('click', MyEvent);
   };
- }, [setMenuOpen, id, menuOpen]);
+ }, [dispatch]);
+ if (state === null || dispatch === null) return <p>Error en el context</p>;
+ const { menuOpen, categories } = state;
  const handleInteraction = () => {
-  setMenuOpen(menuOpen === id ? 0 : id);
+  dispatch({ type: 'SET_MENU_OPEN', value: menuOpen === id ? 0 : id });
  };
 
  return (
@@ -41,17 +49,8 @@ export default function MenuBarButton({
    >
     {textContent}
    </button>
-   {data && menuOpen !== 0 && (
-    <div className="w-screen h-screen absolute block top-16 left-0 border -z-10">
-     <div className="grid w-80 mx-20 bg-white text-sm font-normal  h-80 overflow-y-scroll">
-      {menuOpen === 1 && <MenuOne data={data} />}
-     </div>
-    </div>
-   )}
+   {categories.length > 0 && <MenuOne />}
+   <MenuTwoTest />
   </div>
  );
 }
-
-MenuBarButton.defaultProps = {
- data: undefined,
-};

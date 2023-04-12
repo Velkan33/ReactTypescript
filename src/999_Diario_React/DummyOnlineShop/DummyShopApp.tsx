@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuBar from './MenuBar';
+import MenuBar from './MenuBarComponents/MenuBar';
 import ReducerContext from './ReducerContext';
 
 export default function DummyShopApp() {
