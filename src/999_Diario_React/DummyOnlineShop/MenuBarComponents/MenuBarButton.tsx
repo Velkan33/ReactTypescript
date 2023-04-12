@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import MenuOne from './MenuOne';
+// import MenuOne from './MenuOne';
 import { useMyDispatch, useMyState } from '../ReducerContext';
-import MenuTwoTest from './MenuTwoTest';
+// import MenuTwoTest from './MenuTwoTest';
 
 export default function MenuBarButton({
  textContent,
@@ -17,8 +17,8 @@ export default function MenuBarButton({
  useEffect(() => {
   function MyEvent(e: MouseEvent) {
    const { target } = e;
-   console.log((target as HTMLButtonElement).dataset.id === 'grayArea');
-   console.log(target);
+   // console.log((target as HTMLButtonElement).dataset.id === 'grayArea');
+   // console.log(target);
    if (
     (target as HTMLButtonElement).dataset.id === 'grayArea' &&
     dispatch !== null
@@ -35,7 +35,8 @@ export default function MenuBarButton({
  if (state === null || dispatch === null) return <p>Error en el context</p>;
  const { menuOpen, categories } = state;
  const handleInteraction = () => {
-  dispatch({ type: 'SET_MENU_OPEN', value: menuOpen === id ? 0 : id });
+if()
+  // dispatch({ type: 'SET_MENU_OPEN', value: menuOpen === id ? 0 : id });
  };
 
  return (
@@ -49,8 +50,6 @@ export default function MenuBarButton({
    >
     {textContent}
    </button>
-   {categories.length > 0 && <MenuOne />}
-   <MenuTwoTest />
   </div>
  );
 }

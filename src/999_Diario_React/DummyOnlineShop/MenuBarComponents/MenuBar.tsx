@@ -1,10 +1,12 @@
 import MenuBarButton from './MenuBarButton';
 import { useMyState } from '../ReducerContext';
+import MenuOne from './MenuOne';
+import MenuTwoTest from './MenuTwoTest';
 
 export default function MenuBar() {
  const state = useMyState();
  if (!state) return <p>EmptyState</p>;
- const { menuOpen } = state;
+ const { menuOpen, categories } = state;
  const openStyle = 'fixed z-50  bg-gray-300/50 inset-0 ';
  const closedStyle = 'sticky z-50 inset-0';
  return (
@@ -20,8 +22,10 @@ export default function MenuBar() {
      />
     </a>
     <MenuBarButton textContent="Categories" id={1} />
+    {categories && menuOpen !== null && <MenuOne />}
     <MenuBarButton textContent="Deals" id={2} />
     <MenuBarButton textContent="What's New" id={3} />
+    {menuOpen !== null && <MenuTwoTest />}
     <MenuBarButton textContent="Essentials" id={4} />
    </div>
   </div>

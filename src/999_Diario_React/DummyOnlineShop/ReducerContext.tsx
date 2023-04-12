@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 type StateType = {
  categories: string[];
- menuOpen: null | number;
+ menuOpen: null | number[];
 };
 type Action = {
  type: string;
@@ -24,7 +24,21 @@ function reducer(state: StateType, action: Action) {
    return { ...state, categories: action.data };
   case 'SET_MENU_OPEN':
    if (typeof action.value !== 'number') return state;
-   return { ...state, menuOpen: action.value };
+   if (state.menuOpen === null) {
+    return { ...state, menuOpen: [action.value] };
+   }
+
+   return { ...state, menuOpen: [...state.menuOpen, action.value] };
+  case 'DELETE_MENU_OPEN': {
+   if (typeof action.value !== 'number' || state.menuOpen === null)
+    return state;
+   const nextArr = state.menuOpen.filter((el) => el !== action.value);
+   return { ...state, menuOpen: nextArr };
+  }
+  case 'CLEAR_MENU_OPEN': {
+   if (state.menuOpen === null) return state;
+   return { ...state, menuOpen: [] };
+  }
   default:
    return state;
  }
