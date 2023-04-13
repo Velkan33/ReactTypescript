@@ -35,8 +35,14 @@ export default function MenuBarButton({
  if (state === null || dispatch === null) return <p>Error en el context</p>;
  const { menuOpen, categories } = state;
  const handleInteraction = () => {
-if()
-  // dispatch({ type: 'SET_MENU_OPEN', value: menuOpen === id ? 0 : id });
+  if (menuOpen !== null && menuOpen.includes(id)) {
+   dispatch({ type: 'DELETE_MENU_OPEN', value: id });
+  } else if (
+   menuOpen === null ||
+   (menuOpen !== null && !menuOpen.includes(id))
+  ) {
+   dispatch({ type: 'SET_MENU_OPEN', value: id });
+  }
  };
 
  return (
