@@ -23,7 +23,7 @@ export default function MenuBarButton({
     (target as HTMLButtonElement).dataset.id === 'grayArea' &&
     dispatch !== null
    ) {
-    dispatch({ type: 'SET_MENU_OPEN', value: 0 });
+    dispatch({ type: 'DELETE_MENU_OPEN', value: id });
    }
   }
   document.addEventListener('click', MyEvent);
@@ -31,9 +31,9 @@ export default function MenuBarButton({
   return () => {
    document.removeEventListener('click', MyEvent);
   };
- }, [dispatch]);
+ }, [dispatch, id]);
  if (state === null || dispatch === null) return <p>Error en el context</p>;
- const { menuOpen, categories } = state;
+ const { menuOpen } = state;
  const handleInteraction = () => {
   if (menuOpen !== null && menuOpen.includes(id)) {
    dispatch({ type: 'DELETE_MENU_OPEN', value: id });
@@ -41,6 +41,7 @@ export default function MenuBarButton({
    menuOpen === null ||
    (menuOpen !== null && !menuOpen.includes(id))
   ) {
+   dispatch({ type: 'CLEAR_MENU_OPEN' });
    dispatch({ type: 'SET_MENU_OPEN', value: id });
   }
  };

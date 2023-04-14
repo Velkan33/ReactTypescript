@@ -7,10 +7,15 @@ export default function MenuBar() {
  const state = useMyState();
  if (!state) return <p>EmptyState</p>;
  const { menuOpen, categories } = state;
- const openStyle = 'fixed z-50  bg-gray-300/50 inset-0 ';
+ const openStyle = 'fixed z-50  bg-gray-300/50 inset-0  ';
  const closedStyle = 'sticky z-50 inset-0';
  return (
-  <div data-id="grayArea" className={menuOpen ? openStyle : closedStyle}>
+  <div
+   data-id="grayArea"
+   className={
+    menuOpen !== null && menuOpen.length > 0 ? openStyle : closedStyle
+   }
+  >
    <div className="bg-white shadow-md shadow-black/25 flex gap-2 px-4 py-2 items-center z-40 h-16">
     <a
      href="http://www.google.com"

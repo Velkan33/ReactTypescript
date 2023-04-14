@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuBar from './MenuBarComponents/MenuBar';
 import ReducerContext from './ReducerContext';
+import ProductCards from './ProductComponents/ProductCards';
 
 export default function DummyShopApp() {
  return (
@@ -10,6 +11,7 @@ export default function DummyShopApp() {
     Hello
    </p> */}
     <MenuBar />
+    <ProductCards />
    </div>
   </ReducerContext>
  );
