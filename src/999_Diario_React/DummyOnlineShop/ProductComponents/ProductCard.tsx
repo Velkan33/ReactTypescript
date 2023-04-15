@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useMyDispatch, useMyState } from '../ReducerContext';
 
 type Product = {
  id: number;
@@ -9,8 +11,31 @@ type Product = {
  thumbnail: string;
 };
 export default function ProductCard({ el }: { el: Product }) {
+ const { ref, inView } = useInView();
+ const state = useMyState();
+ const dispatch = useMyDispatch();
+
+ // ANCHOR - Fetch IntersectionObserver
+ useEffect(() => {
+  let ignore = false;
+  if (!ignore && inView && dispatch) {
+   fetch(`https://dummyjson.com/products?limit=10&skip=${el.id + 4}`)
+    .then((res) => res.json())
+    .then((json) => dispatch({ type: 'ADD_PRODUCTS', data: json.products }));
+  }
+  return () => {
+   ignore = true;
+  };
+ }, [inView, dispatch, el.id]);
+ // ANCHOR - Fetch End
+ if (!state || !dispatch) return <p>Error en la card</p>;
+ const isAlmostLast = el.id === state.allProducts.length - 4;
+
  return (
-  <div className="group relative transition shadow-md  hover:shadow-xl hover:scale-105 rounded-lg overflow-hidden bg-white h-60 w-60">
+  <div
+   ref={isAlmostLast ? ref : null}
+   className="group relative transition shadow-md  hover:shadow-xl hover:scale-105 rounded-lg overflow-hidden bg-white h-60 w-60"
+  >
    <div className=" object-cover h-40 overflow-hidden relative">
     {!el.images[1] && (
      <img

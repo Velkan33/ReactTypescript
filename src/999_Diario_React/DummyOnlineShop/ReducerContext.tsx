@@ -39,7 +39,12 @@ function reducer(state: StateType, action: Action) {
    if (!action.data || !dataIsProduct(action.data)) return state;
    return { ...state, allProducts: action.data };
   }
-
+  case 'ADD_PRODUCTS': {
+   if (!action.data || !dataIsProduct(action.data)) return state;
+   const list = [...state.allProducts];
+   const nextList = [...list, ...action.data];
+   return { ...state, allProducts: nextList };
+  }
   case 'SET_MENU_OPEN': {
    if (typeof action.value !== 'number') return state;
    if (state.menuOpen === null) {
