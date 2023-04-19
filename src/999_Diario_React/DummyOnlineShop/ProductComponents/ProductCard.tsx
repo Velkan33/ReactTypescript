@@ -30,7 +30,8 @@ export default function ProductCard({ el }: { el: Product }) {
  // ANCHOR - Fetch End
  if (!state || !dispatch) return <p>Error en la card</p>;
  const isAlmostLast = el.id === state.allProducts.length - 4;
-
+ //decir que el largo sea mayor a X
+ //crear una variable en el state que sea T cuando se haga el primer
  return (
   <div
    ref={isAlmostLast ? ref : null}

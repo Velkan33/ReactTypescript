@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 
 export default function MenuOptionsTemplate({
@@ -27,7 +26,7 @@ export default function MenuOptionsTemplate({
  ) {
   componentStyle = isClosed;
  }
- console.log(menuOpen);
+
  return (
   <div className={componentStyle}>
    <div className=" w-80 left-20 bg-white rounded-b-md text-sm font-normal max-h-[35rem] overflow-y-scroll  ">

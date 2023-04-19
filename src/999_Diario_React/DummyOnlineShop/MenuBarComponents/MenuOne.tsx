@@ -1,12 +1,24 @@
 import { Fragment } from 'react';
-import { useMyState } from '../ReducerContext';
+import { useMyDispatch, useMyState } from '../ReducerContext';
 import MenuOptionsTemplate from './MenuOptionsTemplate';
 
 export default function MenuOne() {
  const state = useMyState();
- if (state === null) return <div>Error with Context</div>;
+ const dispatch = useMyDispatch();
+ if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { categories } = state;
-
+ const handleCategoriesClick = (el: string) => {
+  dispatch({ type: 'CLEAR_MENU_OPEN' });
+  dispatch({ type: 'SET_LOADING' });
+  console.log(el);
+  fetch(`https://dummyjson.com/products/category/${el}`)
+   .then((res) => res.json())
+   .then((json) => {
+    console.log(json);
+    dispatch({ type: 'CREATE_PRODUCTS', data: json.products });
+    dispatch({ type: 'CLEAR_LOADING' });
+   });
+ };
  return (
   <MenuOptionsTemplate elemNumber={1}>
    <>
@@ -24,6 +36,7 @@ export default function MenuOne() {
        type="button"
        className=" text-start relative block py-2 w-full px-4 hover:bg-gray-200/50 hover:font-bold"
        data-id="menuButton"
+       onClick={() => handleCategoriesClick(el)}
       >
        {el.charAt(0).toUpperCase() + el.slice(1)}
       </button>

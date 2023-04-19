@@ -12,6 +12,7 @@ type StateType = {
  categories: string[];
  allProducts: Product[];
  menuOpen: null | number[];
+ loading: boolean;
 };
 type Action = {
  type: string;
@@ -21,7 +22,12 @@ type Action = {
 function dataIsProduct(arg: Product[] | string[]): arg is Product[] {
  return typeof arg[0] !== 'string';
 }
-const initialState = { categories: [], menuOpen: null, allProducts: [] };
+const initialState = {
+ categories: [],
+ menuOpen: null,
+ allProducts: [],
+ loading: false,
+};
 
 const MyState = createContext<null | StateType>(null);
 const MyDispatch = createContext<null | React.Dispatch<Action>>(null);
@@ -61,6 +67,12 @@ function reducer(state: StateType, action: Action) {
   case 'CLEAR_MENU_OPEN': {
    if (state.menuOpen === null) return state;
    return { ...state, menuOpen: [] };
+  }
+  case 'SET_LOADING': {
+   return { ...state, loading: true };
+  }
+  case 'CLEAR_LOADING': {
+   return { ...state, loading: false };
   }
   default:
    return state;

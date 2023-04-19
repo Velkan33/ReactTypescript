@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "6c533251-5000-4501-8532-ec32c424fa25",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://dummyjson.com/products/category/smartphones",
+    "url": "https://dummyjson.com/products/category/smartphones",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-18T03:59:26.444Z",
+    "modified": "2023-04-18T03:59:26.444Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
