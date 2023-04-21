@@ -19,6 +19,7 @@ export default function ProductCard({ el }: { el: Product }) {
  useEffect(() => {
   let ignore = false;
   if (!ignore && inView && dispatch) {
+   // Me quede pensando como hacer que solo se busque de la misma categoria en caso de tener abierta una
    fetch(`https://dummyjson.com/products?limit=10&skip=${el.id + 4}`)
     .then((res) => res.json())
     .then((json) => dispatch({ type: 'ADD_PRODUCTS', data: json.products }));

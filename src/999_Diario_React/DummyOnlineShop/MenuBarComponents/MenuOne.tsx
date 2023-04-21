@@ -8,13 +8,15 @@ export default function MenuOne() {
  if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { categories } = state;
  const handleCategoriesClick = (el: string) => {
+  const nextURL = `https://dummyjson.com/products/category/${el}`;
   dispatch({ type: 'CLEAR_MENU_OPEN' });
   dispatch({ type: 'SET_LOADING' });
-  console.log(el);
-  fetch(`https://dummyjson.com/products/category/${el}`)
+
+  // console.log(el);
+  fetch(nextURL)
    .then((res) => res.json())
    .then((json) => {
-    console.log(json);
+    // console.log(json);
     dispatch({ type: 'CREATE_PRODUCTS', data: json.products });
     dispatch({ type: 'CLEAR_LOADING' });
    });
