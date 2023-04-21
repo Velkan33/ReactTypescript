@@ -29,9 +29,12 @@ export default function ProductCard({ el }: { el: Product }) {
  }, [inView, dispatch, el.id]);
  // ANCHOR - Fetch End
  if (!state || !dispatch) return <p>Error en la card</p>;
- const isAlmostLast = el.id === state.allProducts.length - 4;
- //decir que el largo sea mayor a X
- //crear una variable en el state que sea T cuando se haga el primer
+ const isAlmostLast =
+  el.id === state.allProducts[state.allProducts.length - 4].id; // Aqui cambie para que todos los elementos que sean casi ultimos dentro de allProducts, llamen a mas elementos. Ahora solo falta hacer lo que dice en note para que llame dependiendo de que categoria/lista de productos este abierta en el momento en el que desplacemos la vista
+ // NO -decir que el largo sea mayor a X
+ // NO - crear una variable en el state que sea T cuando se haga el primer
+ // NOTE - convert the fetch address to a state variable
+ // when click the categorie the state address change to the categorie a
  return (
   <div
    ref={isAlmostLast ? ref : null}
