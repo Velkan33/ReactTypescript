@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import defaultFetch from './tools/defaultFetch';
 
 type Product = {
  id: number;
@@ -7,17 +8,26 @@ type Product = {
  price: number;
  rating: number;
  thumbnail: string;
+ description: string;
+ category: string;
+ stock: number;
+ discountPercentage: number;
 };
 type StateType = {
  categories: string[];
  allProducts: Product[];
  menuOpen: null | number[];
  loading: boolean;
+ urlToFetch: string | null;
+ selectedProductId: number | null;
+ selectedProductData: null | Product;
 };
 type Action = {
  type: string;
  data?: string[] | Product[];
+ selectedData?: Product;
  value?: number;
+ urlData?: string;
 };
 function dataIsProduct(arg: Product[] | string[]): arg is Product[] {
  return typeof arg[0] !== 'string';
@@ -27,6 +37,9 @@ const initialState = {
  menuOpen: null,
  allProducts: [],
  loading: false,
+ urlToFetch: null,
+ selectedProductId: null,
+ selectedProductData: null,
 };
 
 const MyState = createContext<null | StateType>(null);
@@ -37,20 +50,24 @@ export const useMyDispatch = () => useContext(MyDispatch);
 // ANCHOR REDUCER
 function reducer(state: StateType, action: Action) {
  switch (action.type) {
+  // Add the categories to be displayed on the categories window
   case 'ADD_CATEGORIES': {
    if (!action.data || dataIsProduct(action.data)) return state;
    return { ...state, categories: action.data };
   }
+  // Create an array of products from a fetch, overwrite the previous data
   case 'CREATE_PRODUCTS': {
    if (!action.data || !dataIsProduct(action.data)) return state;
    return { ...state, allProducts: action.data };
   }
+  // Add products from a fetch to the products array, dont overwrite the previous data
   case 'ADD_PRODUCTS': {
    if (!action.data || !dataIsProduct(action.data)) return state;
    const list = [...state.allProducts];
    const nextList = [...list, ...action.data];
    return { ...state, allProducts: nextList };
   }
+  // Set the menu bar option open, is a number array that show the menu option is open by number in the array
   case 'SET_MENU_OPEN': {
    if (typeof action.value !== 'number') return state;
    if (state.menuOpen === null) {
@@ -58,21 +75,48 @@ function reducer(state: StateType, action: Action) {
    }
    return { ...state, menuOpen: [...state.menuOpen, action.value] };
   }
+  // Remove the menu bar option opened
   case 'DELETE_MENU_OPEN': {
    if (typeof action.value !== 'number' || state.menuOpen === null)
     return state;
    const nextArr = state.menuOpen.filter((el) => el !== action.value);
    return { ...state, menuOpen: nextArr };
   }
+  // Remove all the menu bar option opened
   case 'CLEAR_MENU_OPEN': {
    if (state.menuOpen === null) return state;
    return { ...state, menuOpen: [] };
   }
+  // Set loading to true
   case 'SET_LOADING': {
    return { ...state, loading: true };
   }
+  // Set loading to false
   case 'CLEAR_LOADING': {
    return { ...state, loading: false };
+  }
+  // Set url to fetch when scroll
+  case 'SET_FETCH_URL': {
+   if (typeof action.urlData !== 'string' || !action.urlData) return state;
+   return { ...state, urlToFetch: action.urlData };
+  }
+  // Remove url to fetch when scroll
+  case 'CLEAR_FETCH_URL': {
+   return { ...state, urlToFetch: null };
+  }
+  // Set the selected product
+  case 'SET_SELECTED_PRODUCT_ID': {
+   if (!action.value) return state;
+   return { ...state, selectedProductId: action.value };
+  }
+  // Clear the selected product;
+  case 'CLEAR_SELECTED_PRODUCT_ID': {
+   return { ...state, selectedProductId: null };
+  }
+  // Set selected product data
+  case 'SET_SELECTED_PRODUCT_DATA': {
+   if (!action.selectedData) return state;
+   return { ...state, selectedProductData: action.selectedData };
   }
   default:
    return state;
@@ -103,9 +147,7 @@ export default function ReducerContext({
  useEffect(() => {
   let ignore = false;
   if (!ignore) {
-   fetch('https://dummyjson.com/products?limit=20&skip=0')
-    .then((res) => res.json())
-    .then((json) => dispatch({ type: 'CREATE_PRODUCTS', data: json.products }));
+   defaultFetch(dispatch);
   }
   return () => {
    ignore = true;

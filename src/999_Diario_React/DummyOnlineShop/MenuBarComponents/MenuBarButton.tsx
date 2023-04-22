@@ -17,8 +17,7 @@ export default function MenuBarButton({
  useEffect(() => {
   function MyEvent(e: MouseEvent) {
    const { target } = e;
-   // console.log((target as HTMLButtonElement).dataset.id === 'grayArea');
-   // console.log(target);
+
    if (
     (target as HTMLButtonElement).dataset.id === 'grayArea' &&
     dispatch !== null

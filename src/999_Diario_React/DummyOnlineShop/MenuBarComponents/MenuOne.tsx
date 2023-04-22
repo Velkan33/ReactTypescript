@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 import MenuOptionsTemplate from './MenuOptionsTemplate';
+import categoriesProductFetch from '../tools/categoriesProductFetch';
 
 export default function MenuOne() {
  const state = useMyState();
@@ -8,18 +9,8 @@ export default function MenuOne() {
  if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { categories } = state;
  const handleCategoriesClick = (el: string) => {
-  const nextURL = `https://dummyjson.com/products/category/${el}`;
-  dispatch({ type: 'CLEAR_MENU_OPEN' });
-  dispatch({ type: 'SET_LOADING' });
-
-  // console.log(el);
-  fetch(nextURL)
-   .then((res) => res.json())
-   .then((json) => {
-    // console.log(json);
-    dispatch({ type: 'CREATE_PRODUCTS', data: json.products });
-    dispatch({ type: 'CLEAR_LOADING' });
-   });
+  window.location.hash = el;
+  categoriesProductFetch(dispatch, el);
  };
  return (
   <MenuOptionsTemplate elemNumber={1}>
