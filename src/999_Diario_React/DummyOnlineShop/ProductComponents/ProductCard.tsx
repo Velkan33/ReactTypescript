@@ -21,7 +21,6 @@ export default function ProductCard({ el }: { el: Product }) {
  // ANCHOR - Fetch IntersectionObserver
  useEffect(() => {
   let ignore = false;
-
   if (!ignore && inView && dispatch) {
    fetch(urlToFetch + (el.id + 4))
     .then((res) => res.json())

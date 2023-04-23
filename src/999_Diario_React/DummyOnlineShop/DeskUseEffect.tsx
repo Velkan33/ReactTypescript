@@ -46,6 +46,8 @@ export default function useDeskUseEffect(
     dispatch !== null
    ) {
     defaultFetch(dispatch);
+    dispatch({ type: 'CLEAR_FETCH_URL' });
+    dispatch({ type: 'CLEAR_SELECTED_PRODUCT_ID' });
    } else if (
     // REVIEW - Is one of the categories
     state &&
