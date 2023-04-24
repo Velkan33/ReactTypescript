@@ -45,7 +45,7 @@ export default function ProductCard({ el }: { el: Product }) {
    type="button"
    onClick={handleClick}
    ref={isAlmostLast ? ref : null}
-   className="group relative transition shadow-md  hover:shadow-xl hover:scale-105 rounded-lg overflow-hidden bg-white h-60 w-60"
+   className="group relative transition [box-shadow:10px_10px_0_black] border border-black  hover:shadow-xl hover:scale-105 overflow-hidden bg-white h-80 w-60"
   >
    <div className=" object-cover h-40 overflow-hidden relative">
     {!el.images[1] && (
@@ -75,7 +75,15 @@ export default function ProductCard({ el }: { el: Product }) {
 
     <span className="inline font-normal ml-6">{el.rating}</span>
     <span>&#x2730;</span>
-    <p className="absolute bottom-2 left-2 text-lg font-normal">{el.price}$</p>
+   </div>
+   <div className="flex absolute bottom-2 justify-around w-full">
+    <p className=" text-2xl font-normal">{el.price}$</p>
+    <button
+     type="button"
+     className="border bg-[#cc0000] hover:bg-[#ac0000] text-white px-4 py-1 rounded"
+    >
+     Add to cart
+    </button>
    </div>
   </button>
  );
