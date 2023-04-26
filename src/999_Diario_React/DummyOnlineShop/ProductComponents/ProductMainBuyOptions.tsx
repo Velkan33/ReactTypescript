@@ -1,25 +1,13 @@
 import React from 'react';
 import { useMyState } from '../ReducerContext';
 
-type Product = {
- id: number;
- title: string;
- images: string[];
- price: number;
- rating: number;
- thumbnail: string;
- description: string;
- category: string;
- stock: number;
- discountPercentage: number;
-};
 export default function ProductMainBuyOptions() {
  const state = useMyState();
 
  if (state === null) return <h2>Error en el state, productMainBuyOption</h2>;
  const ProductData = state.selectedProductData;
  return (
-  <div className="lg:w-80 w-60 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
+  <div className="lg:w-80 md:w-60 w-full mb-16 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
    <div className="flex items-center gap-3 px-3">
     <span className="text-3xl text-[#cc0000]">${ProductData?.price}</span>
     {ProductData && ProductData.discountPercentage > 0 && (

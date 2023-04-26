@@ -1,15 +1,8 @@
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useMyDispatch, useMyState } from '../ReducerContext';
+import { Product } from '../tools/typescriptTypes';
 
-type Product = {
- id: number;
- title: string;
- images: string[];
- price: number;
- rating: number;
- thumbnail: string;
-};
 export default function ProductCard({ el }: { el: Product }) {
  const { ref, inView } = useInView();
  const state = useMyState();
@@ -33,10 +26,12 @@ export default function ProductCard({ el }: { el: Product }) {
  // ANCHOR - Fetch End
  if (!state || !dispatch) return <p>Error en la card</p>;
  const isAlmostLast =
-  el.id === state.allProducts[state.allProducts.length - 4].id;
+  state.allProducts.length > 5
+   ? el.id === state.allProducts[state.allProducts.length - 4].id
+   : false;
 
  const handleClick = () => {
-  window.location.hash = el.title.replaceAll(' ', '_');
+  window.location.hash = `${el.title.replaceAll(' ', '_')}/id=${el.id}`;
   dispatch({ type: 'SET_SELECTED_PRODUCT_ID', value: el.id });
  };
  // SECTION - JSX.Element
@@ -45,45 +40,44 @@ export default function ProductCard({ el }: { el: Product }) {
    type="button"
    onClick={handleClick}
    ref={isAlmostLast ? ref : null}
-   className="group relative transition [box-shadow:10px_10px_0_black] border border-black  hover:shadow-xl hover:scale-105 overflow-hidden bg-white h-80 w-60"
+   className="group relative transition [box-shadow:10px_10px_0_black] border border-black  hover:shadow-xl hover:scale-105 overflow-hidden bg-white sm:h-80 sm:w-60 w-full min-h-[30rem] sm:min-h-fit"
   >
-   <div className=" object-cover h-40 overflow-hidden relative">
+   <div className="object-contain grid place-items-center sm:h-40 h-80 overflow-hidden relative">
     {!el.images[1] && (
      <img
-      className="absolute  transition duration-700"
+      className="absolute  transition duration-700 max-h-full"
       src={el.images[0]}
       alt={el.title}
      />
     )}
     {el.images[1] && (
      <img
-      className="absolute group-hover:opacity-0 opacity-100 transition duration-700"
+      className="absolute group-hover:opacity-0 opacity-100 transition duration-700 max-h-full"
       src={el.images[0]}
       alt={el.title}
      />
     )}
     {el.images[1] && (
      <img
-      className="absolute opacity-0 group-hover:opacity-100 transition duration-700"
+      className="absolute opacity-0 group-hover:opacity-100 transition duration-700 max-h-full"
       src={el.images[1]}
       alt={el.title}
      />
     )}
    </div>
-   <div className="mx-2 mt-2">
-    <p className="inline ">{el.title}</p>
+   <div className="my-4 relative flex px-8 sm:px-3 items-center">
+    <p className="inline text-lg sm:text-base">{el.title}</p>
 
-    <span className="inline font-normal ml-6">{el.rating}</span>
+    <span className="font-normal ml-4">{el.rating}</span>
     <span>&#x2730;</span>
    </div>
-   <div className="flex absolute bottom-2 justify-around w-full">
-    <p className=" text-2xl font-normal">{el.price}$</p>
-    <button
+   <div className="flex relative items-center  justify-between sm:px-3 px-8 w-full mb-4 sm:mb-2">
+    <p className=" text-2xl sm:text-xl font-normal">{el.price}$</p>
+    <input
      type="button"
-     className="border bg-[#cc0000] hover:bg-[#ac0000] text-white px-4 py-1 rounded"
-    >
-     Add to cart
-    </button>
+     className="border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded"
+     value="Add to cart"
+    />
    </div>
   </button>
  );

@@ -16,7 +16,7 @@ export default function MenuOne() {
   <MenuOptionsTemplate elemNumber={1}>
    <>
     <h4
-     className="text-start text-md font-bold py-3 mt-1 mx-4"
+     className="text-start sm:text-md text-lg font-bold py-3 mt-1 mx-4"
      data-id="menuButton"
     >
      All Categories
@@ -27,7 +27,7 @@ export default function MenuOne() {
       <hr className="mx-4 h-0" data-id="menuButton" />
       <button
        type="button"
-       className=" text-start relative block py-2 w-full px-4 hover:bg-gray-200/50 hover:font-bold"
+       className=" text-start sm:text-md text-lg relative block py-2 w-full px-4 hover:bg-gray-200/50 hover:font-bold"
        data-id="menuButton"
        onClick={() => handleCategoriesClick(el)}
       >

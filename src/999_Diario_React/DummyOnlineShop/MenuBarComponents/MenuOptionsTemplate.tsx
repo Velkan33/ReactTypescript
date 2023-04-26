@@ -11,11 +11,11 @@ export default function MenuOptionsTemplate({
  const dispatch = useMyDispatch();
  if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { menuOpen } = state;
- const isOpen = 'w-fit animate-slideIn   absolute  top-16 left-0  -z-10';
+ const isOpen = 'w-fit animate-slideIn   absolute  top-16 left-0  -z-30';
  const isClosed =
-  'w-fit animate-slideOut -translate-y-full  absolute top-16 left-0  -z-10';
+  'w-fit animate-slideOut -translate-y-full  absolute top-16 left-0  -z-30';
  let componentStyle =
-  'w-fit absolute top-16 -translate-y-full border-solid border-red-600 border-2 left-0  -z-10';
+  'w-fit absolute top-16 -translate-y-full border-solid border-red-600 border-2 left-0  -z-20';
  if (menuOpen !== null && menuOpen[0] === elemNumber) {
   componentStyle = isOpen;
  } else if (

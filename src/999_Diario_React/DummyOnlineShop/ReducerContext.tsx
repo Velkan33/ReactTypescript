@@ -1,34 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import defaultFetch from './tools/defaultFetch';
+import { Action, Product, StateType } from './tools/typescriptTypes';
 
-type Product = {
- id: number;
- title: string;
- images: string[];
- price: number;
- rating: number;
- thumbnail: string;
- description: string;
- category: string;
- stock: number;
- discountPercentage: number;
-};
-type StateType = {
- categories: string[];
- allProducts: Product[];
- menuOpen: null | number[];
- loading: boolean;
- urlToFetch: string | null;
- selectedProductId: number | null;
- selectedProductData: null | Product;
-};
-type Action = {
- type: string;
- data?: string[] | Product[];
- selectedData?: Product;
- value?: number;
- urlData?: string;
-};
 function dataIsProduct(arg: Product[] | string[]): arg is Product[] {
  return typeof arg[0] !== 'string';
 }
@@ -40,6 +13,7 @@ const initialState = {
  urlToFetch: null,
  selectedProductId: null,
  selectedProductData: null,
+ query: '',
 };
 
 const MyState = createContext<null | StateType>(null);
@@ -118,6 +92,15 @@ function reducer(state: StateType, action: Action) {
    if (!action.selectedData) return state;
    return { ...state, selectedProductData: action.selectedData };
   }
+  // Set query value
+  case 'SET_QUERY': {
+   if (action.query === null || action.query === undefined) return state;
+   return { ...state, query: action.query };
+  }
+  // Clear query value
+  case 'CLEAR_QUERY': {
+   return { ...state, query: '' };
+  }
   default:
    return state;
  }
@@ -146,7 +129,7 @@ export default function ReducerContext({
  }, []);
  useEffect(() => {
   let ignore = false;
-  if (!ignore) {
+  if (!ignore && window.location.hash === '') {
    defaultFetch(dispatch);
   }
   return () => {

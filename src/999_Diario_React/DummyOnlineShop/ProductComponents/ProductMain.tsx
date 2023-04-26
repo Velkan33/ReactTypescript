@@ -39,7 +39,7 @@ export default function ProductMain({
    )}
    {!state.loading && (
     <div
-     className="flex justify-center relative top-24 px-4"
+     className="flex justify-center relative lg:top-24 top-32 px-4"
      key={selectedProductId}
     >
      <div className="w-fit  flex flex-col items-center">
@@ -60,7 +60,7 @@ export default function ProductMain({
           alt={element.images[selectedImage]}
          />
         </div>
-        <div className="flex lg:flex-col gap-2 order-last mr-2">
+        <div className="flex lg:flex-col gap-2 order-last mr-2 md:mb-0 mb-2">
          {element.images.map((url, i) => {
           let selectedImageClass =
            'shadow-sm max-w-[5rem] h-20 overflow-hidden hover:outline outline-1';

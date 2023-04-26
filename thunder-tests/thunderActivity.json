@@ -12,5 +12,118 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b819ccf9-b7ad-4594-bb26-2b17d1157275",
+    "colId": "history",
+    "containerId": "",
+    "name": "'https://dummyjson.com/products/search?q=phone'",
+    "url": "'https://dummyjson.com/products/search?q=phone'",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-26T18:31:26.230Z",
+    "modified": "2023-04-26T18:31:26.230Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "phone'",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "5cf1a3da-6199-48d6-8a5e-757a50d87640",
+    "colId": "history",
+    "containerId": "",
+    "name": "'https://dummyjson.com/products/search?q=phone",
+    "url": "'https://dummyjson.com/products/search?q=phone",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-26T18:31:45.960Z",
+    "modified": "2023-04-26T18:31:45.960Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [
+      {
+        "name": "q",
+        "value": "phone",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "300cb370-e700-4c80-bb22-9c534ccf59cc",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://dummyjson.com/products/search?q=phone",
+    "url": "https://dummyjson.com/products/search?q=phone",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-26T18:31:57.097Z",
+    "modified": "2023-04-26T18:31:57.097Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [
+      {
+        "name": "q",
+        "value": "phone",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0794a011-0787-4c1d-8bba-f5e37d7d8d7f",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://dummyjson.com/products/search?q=laptop",
+    "url": "https://dummyjson.com/products/search?q=laptop",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-26T18:32:05.972Z",
+    "modified": "2023-04-26T18:32:05.972Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [
+      {
+        "name": "q",
+        "value": "laptop",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

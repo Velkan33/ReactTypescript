@@ -1,35 +1,9 @@
 import React, { useEffect } from 'react';
 import defaultFetch from './tools/defaultFetch';
 import categoriesProductFetch from './tools/categoriesProductFetch';
-
-type Product = {
- id: number;
- title: string;
- images: string[];
- price: number;
- rating: number;
- thumbnail: string;
- description: string;
- category: string;
- stock: number;
- discountPercentage: number;
-};
-type StateType = {
- categories: string[];
- allProducts: Product[];
- menuOpen: null | number[];
- loading: boolean;
- urlToFetch: string | null;
- selectedProductId: number | null;
- selectedProductData: null | Product;
-};
-type Action = {
- type: string;
- data?: string[] | Product[];
- selectedData?: Product;
- value?: number;
- urlData?: string;
-};
+import singleProductFetch from './tools/singleProductFetch';
+import { Action, StateType } from './tools/typescriptTypes';
+import menuBarQueryFetch from './tools/menuBarQueryFetch';
 
 export default function useDeskUseEffect(
  dispatch: React.Dispatch<Action> | null,
@@ -40,6 +14,9 @@ export default function useDeskUseEffect(
    // e: HashChangeEvent
    const { hash } = window.location;
    const hashString = hash.replaceAll('_', ' ').slice(1);
+   const hashHaveId = hashString.match(/(?<=id=)[0-9]*/);
+   const hashHaveQuery = hashString.match(/(?<=q=)[a-zA-Z]*/);
+
    if (
     // REVIEW - location.hash is empty(initalPage)
     hash === '' &&
@@ -49,16 +26,30 @@ export default function useDeskUseEffect(
     dispatch({ type: 'CLEAR_FETCH_URL' });
     dispatch({ type: 'CLEAR_SELECTED_PRODUCT_ID' });
    } else if (
-    // REVIEW - Is one of the categories
+    // REVIEW - location.hash have 'id=number'
     state &&
     dispatch &&
-    state.categories.includes(hashString)
+    hashHaveId
    ) {
+    dispatch({ type: 'SET_SELECTED_PRODUCT_ID', value: Number(hashHaveId[0]) });
+    singleProductFetch(dispatch, hashHaveId[0]);
+   } else if (
+    // REVIEW - location.hash have 'q=string'
+    dispatch &&
+    hashHaveQuery
+   ) {
+    menuBarQueryFetch(hashHaveQuery[0], dispatch);
+   } else if (dispatch) {
     categoriesProductFetch(dispatch, hashString);
    }
+
    // NOTE Can add conditions if more hash types
   }
   window.addEventListener('hashchange', hashChangeEvent);
-  return () => window.removeEventListener('hashchange', hashChangeEvent);
+  window.addEventListener('load', hashChangeEvent);
+  return () => {
+   window.removeEventListener('hashchange', hashChangeEvent);
+   window.removeEventListener('load', hashChangeEvent);
+  };
  }, [dispatch, state]);
 }
