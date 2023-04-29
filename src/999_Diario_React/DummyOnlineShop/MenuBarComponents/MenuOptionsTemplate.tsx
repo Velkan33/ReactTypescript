@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 
 export default function MenuOptionsTemplate({
@@ -8,6 +8,7 @@ export default function MenuOptionsTemplate({
  children: JSX.Element;
  elemNumber: number;
 }) {
+ // const [menuIsOpen, setMenuIsOpen] = useState(false);
  const state = useMyState();
  const dispatch = useMyDispatch();
  const myRef = useRef<null | HTMLDivElement>(null);
@@ -15,7 +16,7 @@ export default function MenuOptionsTemplate({
  useEffect(() => {
   if (myRef.current !== null) {
    console.log('hola');
-   myRef.current?.scrollTo({ top: 0 });
+   myRef.current.scrollTo({ top: 0 });
   }
  }, []);
 
