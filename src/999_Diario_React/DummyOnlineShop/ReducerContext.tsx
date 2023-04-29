@@ -59,7 +59,7 @@ function reducer(state: StateType, action: Action) {
   // Remove all the menu bar option opened
   case 'CLEAR_MENU_OPEN': {
    if (state.menuOpen === null) return state;
-   return { ...state, menuOpen: [] };
+   return { ...state, menuOpen: null };
   }
   // Set loading to true
   case 'SET_LOADING': {
