@@ -966,6 +966,10 @@ video {
   width: 20rem;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .w-\[10rem\] {
   width: 10rem;
 }
@@ -1017,14 +1021,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[80\%\] {
-  width: 80%;
-}
-
-.w-\[100\%\] {
-  width: 100%;
 }
 
 .min-w-\[10rem\] {
@@ -1081,14 +1077,6 @@ video {
 
 .basis-\[30\%\] {
   flex-basis: 30%;
-}
-
-.basis-4 {
-  flex-basis: 1rem;
-}
-
-.basis-48 {
-  flex-basis: 12rem;
 }
 
 .-translate-y-full {
@@ -1252,10 +1240,6 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .gap-1 {
   gap: 0.25rem;
 }
@@ -1298,10 +1282,6 @@ video {
 
 .self-start {
   align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
 }
 
 .justify-self-end {
@@ -1419,6 +1399,11 @@ video {
 .bg-\[\#bf4080\] {
   --tw-bg-opacity: 1;
   background-color: rgb(191 64 128 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#c53434\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(197 52 52 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#cc0000\] {
@@ -1545,37 +1530,6 @@ video {
 .bg-zinc-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#cc0000\]\/\[90\] {
-  background-color: rgb(204 0 0 / 90);
-}
-
-.bg-\[\#cc0000\]\/\[20\] {
-  background-color: rgb(204 0 0 / 20);
-}
-
-.bg-\[\#cc0000\]\/90 {
-  background-color: rgb(204 0 0 / 0.9);
-}
-
-.bg-\[\#cc0000\]\/50 {
-  background-color: rgb(204 0 0 / 0.5);
-}
-
-.bg-\[\#c91111\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(201 17 17 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#c92323\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(201 35 35 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#c53434\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(197 52 52 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-l {
@@ -2089,16 +2043,12 @@ video {
   box-shadow: 10px 10px 0 black;
 }
 
-.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(15rem\2c 1fr\)\)\] {
-  grid-template-columns: repeat(auto-fill,minmax(15rem,1fr));
-}
-
-.\[box-shadow\:3px_3px_0_black\] {
-  box-shadow: 3px 3px 0 black;
-}
-
 .\[box-shadow\:5px_5px_0_black\] {
   box-shadow: 5px 5px 0 black;
+}
+
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(15rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(15rem,1fr));
 }
 
 .placeholder\:text-white::-moz-placeholder {
