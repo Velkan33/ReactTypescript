@@ -13,7 +13,7 @@ export type Product = {
 export type StateType = {
  categories: string[];
  allProducts: Product[];
- menuOpen: null | number[];
+ menuOpen: null | number;
  loading: boolean;
  urlToFetch: string | null;
  selectedProductId: number | null;

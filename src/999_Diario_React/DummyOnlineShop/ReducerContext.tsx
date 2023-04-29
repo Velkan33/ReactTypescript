@@ -44,17 +44,13 @@ function reducer(state: StateType, action: Action) {
   // Set the menu bar option open, is a number array that show the menu option is open by number in the array
   case 'SET_MENU_OPEN': {
    if (typeof action.value !== 'number') return state;
-   if (state.menuOpen === null) {
-    return { ...state, menuOpen: [action.value] };
-   }
-   return { ...state, menuOpen: [...state.menuOpen, action.value] };
+
+   return { ...state, menuOpen: action.value };
   }
   // Remove the menu bar option opened
   case 'DELETE_MENU_OPEN': {
-   if (typeof action.value !== 'number' || state.menuOpen === null)
-    return state;
-   const nextArr = state.menuOpen.filter((el) => el !== action.value);
-   return { ...state, menuOpen: nextArr };
+   if (state.menuOpen === null) return state;
+   return { ...state, menuOpen: 0 };
   }
   // Remove all the menu bar option opened
   case 'CLEAR_MENU_OPEN': {

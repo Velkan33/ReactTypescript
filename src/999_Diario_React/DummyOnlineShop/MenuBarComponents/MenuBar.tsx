@@ -21,9 +21,7 @@ export default function MenuBar() {
  return (
   <div
    data-id="grayArea"
-   className={
-    menuOpen !== null && menuOpen.length > 0 ? openStyle : closedStyle
-   }
+   className={menuOpen !== null && menuOpen !== 0 ? openStyle : closedStyle}
   >
    <div className="flex flex-col bg-white z-40">
     <div className="bg-white lg:shadow-md lg:shadow-black/25 flex lg:justify-start justify-between gap-6 px-4 py-2 items-center lg:h-16 h-12">

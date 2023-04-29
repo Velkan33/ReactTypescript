@@ -27,14 +27,9 @@ export default function MenuOptionsTemplate({
   'w-fit animate-slideOut -translate-y-full  absolute top-16 left-0  -z-30';
  let componentStyle =
   'w-fit absolute top-16 -translate-y-full border-solid border-red-600 border-2 left-0  -z-20';
- if (menuOpen !== null && menuOpen[0] === elemNumber) {
+ if (menuOpen !== null && menuOpen === elemNumber) {
   componentStyle = isOpen;
- } else if (
-  menuOpen !== null &&
-  menuOpen.includes(elemNumber) &&
-  menuOpen.length > 1 &&
-  menuOpen[0] !== elemNumber
- ) {
+ } else if (menuOpen !== null && menuOpen !== elemNumber && menuOpen === 0) {
   componentStyle = isClosed;
  }
 
