@@ -15,7 +15,7 @@ export default function MenuBar() {
  const width = callbackWidth || initialWidth;
  if (!state) return <p>EmptyState</p>;
  const { menuOpen, categories } = state;
- const openStyle = 'fixed z-50  bg-gray-300/50 inset-0  ';
+ const openStyle = 'fixed z-50  bg-black/75 inset-0  ';
  const closedStyle = 'fixed z-10 top-0 right-0 left-0';
 
  return (

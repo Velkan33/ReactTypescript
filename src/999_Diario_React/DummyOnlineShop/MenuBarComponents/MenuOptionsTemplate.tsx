@@ -1,3 +1,4 @@
+import React, { useRef, useEffect } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 
 export default function MenuOptionsTemplate({
@@ -9,6 +10,15 @@ export default function MenuOptionsTemplate({
 }) {
  const state = useMyState();
  const dispatch = useMyDispatch();
+ const myRef = useRef<null | HTMLDivElement>(null);
+
+ useEffect(() => {
+  if (myRef.current !== null) {
+   console.log('hola');
+   myRef.current?.scrollTo({ top: 0 });
+  }
+ }, []);
+
  if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { menuOpen } = state;
  const isOpen = 'w-fit animate-slideIn   absolute  top-16 left-0  -z-30';
@@ -29,7 +39,10 @@ export default function MenuOptionsTemplate({
 
  return (
   <div className={componentStyle}>
-   <div className=" w-80 left-20 bg-white rounded-b-md text-sm font-normal max-h-[35rem] overflow-y-scroll  ">
+   <div
+    className=" w-80 left-20 bg-white rounded-b-md text-sm font-normal max-h-[35rem] overflow-y-scroll  "
+    ref={myRef}
+   >
     {children}
    </div>
   </div>
