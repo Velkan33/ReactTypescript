@@ -11,18 +11,24 @@ export default function ProductCard({ el }: { el: Product }) {
   state && state.urlToFetch
    ? state.urlToFetch
    : 'https://dummyjson.com/products?limit=10&skip=';
+ let elemToSkip = 0;
+ // LINK elemToSkip is to detect
+ if (state)
+  elemToSkip = state.allProducts.findIndex((elem) => elem.id === el.id);
  // ANCHOR - Fetch IntersectionObserver
  useEffect(() => {
   let ignore = false;
+
   if (!ignore && inView && dispatch) {
-   fetch(urlToFetch + (el.id + 4))
+   // need to find the id in the allProducts array.
+   fetch(urlToFetch + (elemToSkip + 4))
     .then((res) => res.json())
     .then((json) => dispatch({ type: 'ADD_PRODUCTS', data: json.products }));
   }
   return () => {
    ignore = true;
   };
- }, [inView, dispatch, el.id, urlToFetch]);
+ }, [inView, dispatch, el.id, urlToFetch, elemToSkip]);
  // ANCHOR - Fetch End
  if (!state || !dispatch) return <p>Error en la card</p>;
  const isAlmostLast =

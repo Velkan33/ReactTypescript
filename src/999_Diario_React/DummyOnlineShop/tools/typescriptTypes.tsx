@@ -1,5 +1,5 @@
 export type Product = {
- id: number;
+ id: number | string;
  title: string;
  images: string[];
  price: number;
@@ -16,7 +16,7 @@ export type StateType = {
  menuOpen: null | number;
  loading: boolean;
  urlToFetch: string | null;
- selectedProductId: number | null;
+ selectedProductId: number | string | null;
  selectedProductData: null | Product;
  query: string;
 };
@@ -24,7 +24,7 @@ export type Action = {
  type: string;
  data?: string[] | Product[];
  selectedData?: Product;
- value?: number;
+ value?: number | string;
  urlData?: string;
  query?: string;
 };

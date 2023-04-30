@@ -35,7 +35,7 @@ export default function MenuBarButton({
  const { menuOpen } = state;
  const handleInteraction = () => {
   if (menuOpen !== null && menuOpen === id) {
-   dispatch({ type: 'DELETE_MENU_OPEN' });
+   dispatch({ type: 'CLEAR_MENU_OPEN' });
   } else if (menuOpen === null || (menuOpen !== null && menuOpen !== id)) {
    // dispatch({ type: 'CLEAR_MENU_OPEN' });
    dispatch({ type: 'SET_MENU_OPEN', value: id });

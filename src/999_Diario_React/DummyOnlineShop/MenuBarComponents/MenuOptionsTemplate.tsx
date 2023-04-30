@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 
 export default function MenuOptionsTemplate({
@@ -12,13 +12,14 @@ export default function MenuOptionsTemplate({
  const state = useMyState();
  const dispatch = useMyDispatch();
  const myRef = useRef<null | HTMLDivElement>(null);
-
+ // ANCHOR Scroll the menu button categories to top
+ const open = state && state.menuOpen;
  useEffect(() => {
-  if (myRef.current !== null) {
-   console.log('hola');
+  if (myRef.current !== null && open !== null) {
    myRef.current.scrollTo({ top: 0 });
   }
- }, []);
+ }, [state, open]);
+ // ANCHOR End
 
  if (state === null || dispatch === null) return <div>Error with Context</div>;
  const { menuOpen } = state;

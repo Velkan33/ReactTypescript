@@ -7,7 +7,7 @@ import Loader from '../Components/Loader';
 export default function ProductMain({
  selectedProductId,
 }: {
- selectedProductId: number;
+ selectedProductId: number | string;
 }) {
  const [selectedImage, setSelectedImage] = useState<number>(0);
  const dispatch = useMyDispatch();
