@@ -19,12 +19,14 @@ export type StateType = {
  selectedProductId: number | string | null;
  selectedProductData: null | Product;
  query: string;
+ shoppingCart: null | { [key: string | number]: number };
 };
 export type Action = {
  type: string;
  data?: string[] | Product[];
  selectedData?: Product;
  value?: number | string;
+ amount?: number;
  urlData?: string;
  query?: string;
 };

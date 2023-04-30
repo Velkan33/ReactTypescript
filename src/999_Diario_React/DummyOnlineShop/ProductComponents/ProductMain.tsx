@@ -52,7 +52,7 @@ export default function ProductMain({
        id="pict, selected picture, buy option"
       >
        <div className="flex gap-2 lg:flex-row flex-col">
-        <div className="border border-black grid place-items-center min-w-[10rem] order-first p-5 ">
+        <div className="border border-black grid place-items-center min-w-[10rem] order-first sm:p-5 ">
          <img
           className="object-cover max-h-[20rem]"
           key={element.images[selectedImage]}

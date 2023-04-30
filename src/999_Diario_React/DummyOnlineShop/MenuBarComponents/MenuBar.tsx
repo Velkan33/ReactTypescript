@@ -13,17 +13,23 @@ export default function MenuBar() {
  const initialWidth = screenWidthCategories(window.innerWidth);
  const callbackWidth = useGetScreenWidth();
  const width = callbackWidth || initialWidth;
+
  if (!state) return <p>EmptyState</p>;
  const { menuOpen, categories } = state;
  const openStyle = 'fixed z-50  bg-black/75 inset-0  ';
  const closedStyle = 'fixed z-10 top-0 right-0 left-0';
+ const cartHasItems =
+  state.shoppingCart && Object.keys(state.shoppingCart).length > 0;
+ const amountOfCartItems =
+  state.shoppingCart &&
+  Object.values(state.shoppingCart).reduce((total, value) => total + value);
 
  return (
   <div
    data-id="grayArea"
    className={menuOpen !== null && menuOpen !== 0 ? openStyle : closedStyle}
   >
-   <div className="flex flex-col bg-white z-40">
+   <div className="flex flex-col bg-white z-40 ">
     <div className="bg-white lg:shadow-md lg:shadow-black/25 flex lg:justify-start justify-between gap-6 px-4 py-2 items-center lg:h-16 h-12">
      {width !== 'xl' && (
       <button
@@ -54,12 +60,19 @@ export default function MenuBar() {
       />
      </a>
      {width !== 'small' && width !== 'medium' && <MenuBarQueryShort />}
-     <span
-      className="material-symbols-outlined order-3"
-      style={{ fontSize: '30px' }}
-     >
-      shopping_cart
-     </span>
+     <div className="order-3 relative">
+      {amountOfCartItems && cartHasItems && (
+       <div className="absolute px-[.30rem] py-[.05rem] rounded-full bg-[#cc0000] text-white text-[11px] -right-2 -top-2">
+        {amountOfCartItems}
+       </div>
+      )}
+      <span
+       className="material-symbols-outlined  "
+       style={{ fontSize: '30px' }}
+      >
+       shopping_cart
+      </span>
+     </div>
     </div>
 
     {(width === 'small' || width === 'medium') && <MenuBarQuery />}

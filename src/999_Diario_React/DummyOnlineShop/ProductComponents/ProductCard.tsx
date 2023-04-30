@@ -40,6 +40,13 @@ export default function ProductCard({ el }: { el: Product }) {
   window.location.hash = `${el.title.replaceAll(' ', '_')}/id=${el.id}`;
   dispatch({ type: 'SET_SELECTED_PRODUCT_ID', value: el.id });
  };
+ const cartHasThisItem =
+  state.shoppingCart &&
+  Object.keys(state.shoppingCart).includes(el.id.toString());
+ const isNotOnCartButtonStyle =
+  'border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
+ const isOnCartButtonStyle =
+  'border sm:px-4 sm:py-1 px-6 py-2 text-lg rounded bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal text-white';
  // SECTION - JSX.Element
  return (
   <button
@@ -81,8 +88,12 @@ export default function ProductCard({ el }: { el: Product }) {
     <p className=" text-2xl sm:text-xl font-normal">{el.price}$</p>
     <input
      type="button"
-     className="border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded"
-     value="Add to cart"
+     className={cartHasThisItem ? isOnCartButtonStyle : isNotOnCartButtonStyle}
+     value={
+      cartHasThisItem && state.shoppingCart
+       ? `${state.shoppingCart[el.id.toString()]} in cart`
+       : 'Add to cart'
+     }
     />
    </div>
   </button>

@@ -8,7 +8,10 @@ export default function Desk() {
  const state = useMyState();
  const dispatch = useMyDispatch();
  useDeskUseEffect(dispatch, state);
- if (state === null) return <h3>Error en el state de Desk</h3>;
+
+ if (state === null || dispatch === null)
+  return <h3>Error en el state de Desk</h3>;
+
  return (
   <>
    {state.selectedProductId === null && <ProductCards />}

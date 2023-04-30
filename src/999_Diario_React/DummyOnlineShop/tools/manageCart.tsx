@@ -1,8 +1,9 @@
 import React from 'react';
-
+//* * In this function we update the localStorage with the shopping cart */
 export default function manageCart(parameters: {
  type: string;
  id?: string | number;
+ amount?: number;
 }) {
  const localStorageObject =
   window.localStorage.getItem('shopping_cart') !== null
@@ -16,7 +17,7 @@ export default function manageCart(parameters: {
     if (localStorageObject[parameters.id]) break;
     const data = {
      ...localStorageObject,
-     [parameters.id]: 1,
+     [parameters.id]: parameters.amount || 1,
     };
     const stringifyData = JSON.stringify(data);
     window.localStorage.setItem('shopping_cart', stringifyData);
@@ -40,7 +41,7 @@ export default function manageCart(parameters: {
    {
     const stringifyEmptyArray = JSON.stringify({});
     const shoppingCartExist =
-     window.localStorage.getItem('shopping_cart') !== undefined;
+     window.localStorage.getItem('shopping_cart') !== null;
     if (shoppingCartExist) break;
     window.localStorage.setItem('shopping_cart', stringifyEmptyArray);
    }

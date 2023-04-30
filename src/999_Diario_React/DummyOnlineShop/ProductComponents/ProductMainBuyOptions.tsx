@@ -1,16 +1,26 @@
 import React from 'react';
-import { useMyState } from '../ReducerContext';
-import manageCart from '../tools/manageCart';
+import { useMyDispatch, useMyState } from '../ReducerContext';
 
 export default function ProductMainBuyOptions() {
  const state = useMyState();
+ const dispatch = useMyDispatch();
 
- if (state === null) return <h2>Error en el state, productMainBuyOption</h2>;
+ if (state === null || dispatch === null)
+  return <h2>Error en el state, productMainBuyOption</h2>;
  const ProductData = state.selectedProductData;
  const handleAddToCartClick = () => {
   if (ProductData === null) return;
-  manageCart({ type: 'ADD_ITEM_ID', id: ProductData.id });
+  if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
+  dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
  };
+ const isOnCart =
+  ProductData &&
+  state.shoppingCart &&
+  Object.keys(state.shoppingCart).includes(ProductData.id.toString());
+ const isNotOnCartButtonStyle =
+  ' flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white';
+ const isOnCartButtonStyle =
+  'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal text-white';
  return (
   <div className="lg:w-80 md:w-60 w-full mb-16 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
    <div className="flex items-center gap-3 px-3">
@@ -48,10 +58,12 @@ export default function ProductMainBuyOptions() {
     </p>
     <button
      type="button"
-     className=" flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white"
+     className={isOnCart ? isOnCartButtonStyle : isNotOnCartButtonStyle}
      onClick={handleAddToCartClick}
     >
-     Add to cart
+     {isOnCart
+      ? `${state.shoppingCart && state.shoppingCart[ProductData.id]} in cart`
+      : 'Add to cart'}
     </button>
    </div>
   </div>

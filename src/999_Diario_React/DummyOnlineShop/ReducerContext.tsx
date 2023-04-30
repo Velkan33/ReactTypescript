@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import defaultFetch from './tools/defaultFetch';
 import { Action, Product, StateType } from './tools/typescriptTypes';
+import manageCart from './tools/manageCart';
 
 function dataIsProduct(arg: Product[] | string[]): arg is Product[] {
  return typeof arg[0] !== 'string';
 }
+const localStorageCart = window.localStorage.getItem('shopping_cart');
 const initialState = {
  categories: [],
  menuOpen: null,
@@ -14,6 +16,7 @@ const initialState = {
  selectedProductId: null,
  selectedProductData: null,
  query: '',
+ shoppingCart: localStorageCart ? JSON.parse(localStorageCart) : null,
 };
 
 const MyState = createContext<null | StateType>(null);
@@ -96,6 +99,30 @@ function reducer(state: StateType, action: Action) {
   // Clear query value
   case 'CLEAR_QUERY': {
    return { ...state, query: '' };
+  }
+  // Create a shopping cart and create it inside local storage
+  case 'SET_CART_STATE': {
+   manageCart({ type: 'SET_CART' });
+   return { ...state, shoppingCart: {} };
+  }
+  // Add item to shoppingCart and update localstorage
+  case 'ADD_ITEM_TO_CART': {
+   if (typeof action.value !== 'string' && typeof action.value !== 'number')
+    return state;
+   manageCart({ type: 'ADD_ITEM_ID', id: action.value, amount: action.amount });
+   return {
+    ...state,
+    shoppingCart: { ...state.shoppingCart, [action.value]: action.amount || 1 },
+   };
+  }
+  // Remove item from shoppingCart and update localstorage
+  case 'REMOVE_ITEM_FROM_CART': {
+   if (typeof action.value !== 'string' && typeof action.value !== 'number')
+    return state;
+   manageCart({ type: 'REMOVE_ITEM_ID', id: action.value });
+   const nextCart = { ...state, shoppingCart: { ...state.shoppingCart } };
+   delete nextCart.shoppingCart[action.value];
+   return nextCart;
   }
   default:
    return state;
