@@ -20,7 +20,7 @@ export default function ProductMainBuyOptions() {
  const isNotOnCartButtonStyle =
   ' flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white';
  const isOnCartButtonStyle =
-  'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal text-white';
+  'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
  return (
   <div className="lg:w-80 md:w-60 w-full mb-16 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
    <div className="flex items-center gap-3 px-3">

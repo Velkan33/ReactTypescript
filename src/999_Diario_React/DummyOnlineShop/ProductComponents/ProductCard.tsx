@@ -46,7 +46,13 @@ export default function ProductCard({ el }: { el: Product }) {
  const isNotOnCartButtonStyle =
   'border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
  const isOnCartButtonStyle =
-  'border sm:px-4 sm:py-1 px-6 py-2 text-lg rounded bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal text-white';
+  'border sm:px-4 sm:py-1 px-6 py-2 text-lg rounded bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
+
+ const handleAddToCartClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
+  dispatch({ type: 'ADD_ITEM_TO_CART', value: el.id });
+ };
  // SECTION - JSX.Element
  return (
   <button
@@ -94,6 +100,7 @@ export default function ProductCard({ el }: { el: Product }) {
        ? `${state.shoppingCart[el.id.toString()]} in cart`
        : 'Add to cart'
      }
+     onClick={handleAddToCartClick}
     />
    </div>
   </button>
