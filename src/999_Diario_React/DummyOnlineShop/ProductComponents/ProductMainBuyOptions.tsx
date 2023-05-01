@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
+import LabelDiv from './ProudctMainBuyOptionComponent/LabelDiv';
+import LabelInput from './ProudctMainBuyOptionComponent/LabelInput';
 
 export default function ProductMainBuyOptions() {
+ const [addMore, setAddMore] = useState(false);
  const state = useMyState();
  const dispatch = useMyDispatch();
 
  if (state === null || dispatch === null)
   return <h2>Error en el state, productMainBuyOption</h2>;
  const ProductData = state.selectedProductData;
- const handleAddToCartClick = () => {
-  if (ProductData === null) return;
-  if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
-  dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
- };
+
  const isOnCart =
   ProductData &&
   state.shoppingCart &&
@@ -21,6 +20,27 @@ export default function ProductMainBuyOptions() {
   ' flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white';
  const isOnCartButtonStyle =
   'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
+
+ const handleAddToCartClick = () => {
+  if (ProductData === null) return;
+  if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
+  dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
+  if (isOnCart) setAddMore(!addMore);
+ };
+ const handleMoreItemsRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if (!ProductData) return;
+  setAddMore(!addMore);
+
+  if (Number(e.target.value) > 0) {
+   dispatch({
+    type: 'ADD_ITEM_TO_CART',
+    value: ProductData.id,
+    amount: Number(e.target.value),
+   });
+   return;
+  }
+  dispatch({ type: 'REMOVE_ITEM_FROM_CART', value: ProductData.id });
+ };
  return (
   <div className="lg:w-80 md:w-60 w-full mb-16 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
    <div className="flex items-center gap-3 px-3">
@@ -46,25 +66,36 @@ export default function ProductMainBuyOptions() {
       '☆'.repeat(5 - Math.round(ProductData.rating))}{' '}
     {ProductData?.rating}
    </p>
-   <div className="flex gap-3 px-3 mt-4">
+   <div className="flex gap-3 px-3 mt-4 items-center">
     <p
      className={
       ProductData !== null && ProductData?.stock > 10
-       ? 'font-normal grid place-items-center border  rounded px-2'
-       : 'font-normal grid place-items-center border rounded text-[red-500]'
+       ? 'font-normal grid place-items-center border py-2  rounded px-2'
+       : 'font-normal grid place-items-center border py-2 rounded text-[red-500]'
      }
     >
      stock:{ProductData?.stock}
     </p>
-    <button
-     type="button"
-     className={isOnCart ? isOnCartButtonStyle : isNotOnCartButtonStyle}
-     onClick={handleAddToCartClick}
-    >
-     {isOnCart
-      ? `${state.shoppingCart && state.shoppingCart[ProductData.id]} in cart`
-      : 'Add to cart'}
-    </button>
+    {addMore && (
+     <LabelDiv>
+      <>
+       <LabelInput amount={0} handler={handleMoreItemsRadio} />
+       <LabelInput amount={1} handler={handleMoreItemsRadio} />
+       <LabelInput amount={2} handler={handleMoreItemsRadio} />
+      </>
+     </LabelDiv>
+    )}
+    {!addMore && (
+     <button
+      type="button"
+      className={isOnCart ? isOnCartButtonStyle : isNotOnCartButtonStyle}
+      onClick={handleAddToCartClick}
+     >
+      {isOnCart
+       ? `${state.shoppingCart && state.shoppingCart[ProductData.id]} in cart`
+       : 'Add to cart'}
+     </button>
+    )}
    </div>
   </div>
  );

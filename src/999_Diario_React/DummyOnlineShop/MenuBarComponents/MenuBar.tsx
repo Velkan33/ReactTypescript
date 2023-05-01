@@ -21,8 +21,9 @@ export default function MenuBar() {
  const cartHasItems =
   state.shoppingCart && Object.keys(state.shoppingCart).length > 0;
  const amountOfCartItems =
-  state.shoppingCart &&
-  Object.values(state.shoppingCart).reduce((total, value) => total + value);
+  state.shoppingCart && Object.keys(state.shoppingCart).length > 0
+   ? Object.values(state.shoppingCart).reduce((total, value) => total + value)
+   : 0;
 
  return (
   <div
@@ -61,7 +62,7 @@ export default function MenuBar() {
      </a>
      {width !== 'small' && width !== 'medium' && <MenuBarQueryShort />}
      <div className="order-3 relative flex">
-      {amountOfCartItems && cartHasItems && (
+      {amountOfCartItems > 0 && cartHasItems && (
        <div className="absolute px-[.30rem] py-[.05rem] rounded-full bg-[#cc0000] text-white text-[11px] -right-2 -top-2">
         {amountOfCartItems}
        </div>

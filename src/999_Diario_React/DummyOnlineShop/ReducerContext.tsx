@@ -55,7 +55,6 @@ function reducer(state: StateType, action: Action) {
    if (state.menuOpen === null) return state;
    return { ...state, menuOpen: 0 };
   }
-  // Remove all the menu bar option opened
   case 'CLEAR_MENU_OPEN': {
    if (state.menuOpen === null) return state;
    return { ...state, menuOpen: null };

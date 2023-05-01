@@ -14,26 +14,29 @@ export default function manageCart(parameters: {
   case 'ADD_ITEM_ID':
    {
     if (!parameters.id) break;
-    if (localStorageObject[parameters.id]) break;
+    // if (localStorageObject[parameters.id]) break;
     const data = {
      ...localStorageObject,
      [parameters.id]: parameters.amount || 1,
     };
     const stringifyData = JSON.stringify(data);
     window.localStorage.setItem('shopping_cart', stringifyData);
-    // TODO -- Aqui tengo que hacer el dispatch al state
    }
    break;
   case 'REMOVE_ITEM_ID':
    {
     if (!parameters.id) break;
-    const arrayCopy = [...localStorageObject.id];
-    const myNextArray = arrayCopy.filter((elem) => elem !== parameters.id);
-    const data = {
-     ...localStorageObject,
-     id: myNextArray,
-    };
-    const stringifyData = JSON.stringify(data);
+    console.log(localStorageObject);
+    const objectCopy = { ...localStorageObject };
+    delete objectCopy[parameters.id];
+
+    // arrayCopy.filter((elem) => elem !== parameters.id);
+
+    // const data = {
+    //  ...localStorageObject,
+    //  id: myNextObject,
+    // };
+    const stringifyData = JSON.stringify(objectCopy);
     window.localStorage.setItem('shopping_cart', stringifyData);
    }
    break;
