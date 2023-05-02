@@ -21,7 +21,7 @@ export default function ProductMainBuyOptions() {
  const isNotOnCartButtonStyle =
   ' flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white';
  const isOnCartButtonStyle =
-  'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
+  'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 border border-2 border-green-700 hover:border-green-600  font-normal';
 
  const handleAddToCartClick = () => {
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
