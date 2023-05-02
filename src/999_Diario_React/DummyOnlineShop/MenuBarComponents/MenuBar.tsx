@@ -7,6 +7,9 @@ import useGetScreenWidth, {
 } from '../tools/useGetScreenWidth';
 import MenuBarQuery from './MenuBarQuery';
 import MenuBarQueryShort from './MenuBarQueryShort';
+import SmallScreenMenuOne from './SmallScreenMenuOne';
+import SmallScreenMenuButton from './SmallScreenMenuButton';
+import MenuOptionsTemplate from './MenuOptionsTemplate';
 
 export default function MenuBar() {
  const state = useMyState();
@@ -32,19 +35,17 @@ export default function MenuBar() {
   >
    <div className="flex flex-col bg-white z-40 ">
     <div className="bg-white lg:shadow-md lg:shadow-black/25 flex lg:justify-start justify-between gap-6 px-4 py-2 items-center lg:h-16 h-12">
-     {width !== 'xl' && (
-      <button
-       type="button"
-       className="material-symbols-outlined sm:order-2 rounded hover:bg-gray-100 p-1"
-       style={{ fontSize: '35px' }}
-      >
-       menu
-      </button>
-     )}
+     {width !== 'xl' && <SmallScreenMenuButton />}
+     {width !== 'xl' && categories && <SmallScreenMenuOne />}
      {width === 'xl' && (
       <div className="flex sm:order-2">
        <MenuBarButton textContent="Categories" id={1} />
-       {categories && menuOpen !== null && <MenuOne />}
+       {categories && menuOpen !== null && (
+        <MenuOptionsTemplate elemNumber={1}>
+         <MenuOne />
+        </MenuOptionsTemplate>
+       )}
+
        <MenuBarButton textContent="Deals" id={2} />
        <MenuBarButton textContent="What's New" id={3} />
        {menuOpen !== null && <MenuTwoTest />}

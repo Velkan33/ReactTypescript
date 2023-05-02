@@ -47,7 +47,8 @@ export default function ProductCard({ el }: { el: Product }) {
   Object.keys(state.shoppingCart).includes(el.id.toString());
  const redButtonStyle =
   'border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
-
+ const onCartButtonStyle =
+  ' bg-white text-green-700 hover:text-green-600 border border-2 hover:border-green-600 border-green-700 sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
  const handleAddToCartClick = (e: React.MouseEvent<HTMLInputElement>) => {
   e.stopPropagation();
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
@@ -102,7 +103,7 @@ export default function ProductCard({ el }: { el: Product }) {
 
     <input
      type="button"
-     className={redButtonStyle}
+     className={!isOnCart ? redButtonStyle : onCartButtonStyle}
      value="Add to cart"
      onClick={handleAddToCartClick}
     />

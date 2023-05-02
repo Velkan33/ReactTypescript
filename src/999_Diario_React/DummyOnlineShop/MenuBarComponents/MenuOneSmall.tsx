@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 import categoriesProductFetch from '../tools/categoriesProductFetch';
 
-export default function MenuOne() {
+export default function MenuOneSmall() {
  const state = useMyState();
  const dispatch = useMyDispatch();
  if (state === null || dispatch === null) return <div>Error with Context</div>;

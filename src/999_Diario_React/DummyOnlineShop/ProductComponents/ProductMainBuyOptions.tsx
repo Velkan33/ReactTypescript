@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 import LabelDiv from './ProudctMainBuyOptionComponent/LabelDiv';
 import LabelInput from './ProudctMainBuyOptionComponent/LabelInput';
+import posibleAmountToBuy from '../tools/posibleAmountToBuy';
 
 export default function ProductMainBuyOptions() {
  const [addMore, setAddMore] = useState(false);
@@ -11,9 +12,10 @@ export default function ProductMainBuyOptions() {
  if (state === null || dispatch === null)
   return <h2>Error en el state, productMainBuyOption</h2>;
  const ProductData = state.selectedProductData;
-
+ // Empty ProductData return
+ if (ProductData === null) return <h3>Error on product Data</h3>;
+ //
  const isOnCart =
-  ProductData &&
   state.shoppingCart &&
   Object.keys(state.shoppingCart).includes(ProductData.id.toString());
  const isNotOnCartButtonStyle =
@@ -22,7 +24,6 @@ export default function ProductMainBuyOptions() {
   'flex-1 mx-auto inline-block rounded-md py-2  bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
 
  const handleAddToCartClick = () => {
-  if (ProductData === null) return;
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
   if (!isOnCart) {
    dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
@@ -30,8 +31,8 @@ export default function ProductMainBuyOptions() {
 
   if (isOnCart) setAddMore(!addMore);
  };
+ /// ///
  const handleMoreItemsRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (!ProductData) return;
   setAddMore(!addMore);
 
   if (Number(e.target.value) > 0) {
@@ -44,14 +45,16 @@ export default function ProductMainBuyOptions() {
   }
   dispatch({ type: 'REMOVE_ITEM_FROM_CART', value: ProductData.id });
  };
+ /// ///
+ const amountToBuy = posibleAmountToBuy(ProductData.price);
  return (
   <div className="lg:w-80 md:w-60 w-full mb-16 relative self-start border border-black justify-self-end py-4 [box-shadow:10px_10px_0_black]">
    <div className="flex items-center gap-3 px-3">
-    <span className="text-3xl text-[#cc0000]">${ProductData?.price}</span>
-    {ProductData && ProductData.discountPercentage > 0 && (
+    <span className="text-3xl text-[#cc0000]">${ProductData.price}</span>
+    {ProductData.discountPercentage > 0 && (
      <>
       <span className="bg-[#cc0000]/75 text-white font-normal rounded-full px-2 py-[.1rem] text-sm">
-       SAVE {ProductData?.discountPercentage}%
+       SAVE {ProductData.discountPercentage}%
       </span>
       <span>
        <del>
@@ -64,27 +67,26 @@ export default function ProductMainBuyOptions() {
     )}
    </div>
    <p className="px-3 py-3">
-    {ProductData !== null &&
-     '★'.repeat(Math.round(ProductData.rating)) +
-      '☆'.repeat(5 - Math.round(ProductData.rating))}{' '}
-    {ProductData?.rating}
+    {'★'.repeat(Math.round(ProductData.rating)) +
+     '☆'.repeat(5 - Math.round(ProductData.rating))}{' '}
+    {ProductData.rating}
    </p>
    <div className="flex gap-3 px-3 mt-4 items-center">
     <p
      className={
-      ProductData !== null && ProductData?.stock > 10
+      ProductData.stock > 10
        ? 'font-normal grid place-items-center border py-2  rounded px-2'
        : 'font-normal grid place-items-center border py-2 rounded text-[red-500]'
      }
     >
-     stock:{ProductData?.stock}
+     stock:{ProductData.stock}
     </p>
     {addMore && (
      <LabelDiv>
       <>
-       <LabelInput amount={0} handler={handleMoreItemsRadio} />
-       <LabelInput amount={1} handler={handleMoreItemsRadio} />
-       <LabelInput amount={2} handler={handleMoreItemsRadio} />
+       {amountToBuy.map((el: number) => (
+        <LabelInput key={el} amount={el} handler={handleMoreItemsRadio} />
+       ))}
       </>
      </LabelDiv>
     )}
