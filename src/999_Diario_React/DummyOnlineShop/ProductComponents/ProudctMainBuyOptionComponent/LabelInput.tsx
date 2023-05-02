@@ -10,7 +10,7 @@ export default function LabelInput({
  return (
   <label
    htmlFor={`radio${amount}`}
-   className="border pl-2 flex gap-1 md:text-base text-xl"
+   className="border-b hover:border-black pl-2 flex gap-1 md:text-base text-xl"
   >
    <input
     id={`radio${amount}`}
