@@ -24,7 +24,10 @@ export default function ProductMainBuyOptions() {
  const handleAddToCartClick = () => {
   if (ProductData === null) return;
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
-  dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
+  if (!isOnCart) {
+   dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
+  }
+
   if (isOnCart) setAddMore(!addMore);
  };
  const handleMoreItemsRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +97,7 @@ export default function ProductMainBuyOptions() {
       {isOnCart
        ? `${state.shoppingCart && state.shoppingCart[ProductData.id]} in cart`
        : 'Add to cart'}
+      {isOnCart && <span className="text-xl pl-2">↓</span>}
      </button>
     )}
    </div>

@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 import { Product } from '../tools/typescriptTypes';
+import LabelDiv from './ProudctMainBuyOptionComponent/LabelDiv';
+import LabelInput from './ProudctMainBuyOptionComponent/LabelInput';
 
 export default function ProductCard({ el }: { el: Product }) {
  const { ref, inView } = useInView();
@@ -40,18 +42,21 @@ export default function ProductCard({ el }: { el: Product }) {
   window.location.hash = `${el.title.replaceAll(' ', '_')}/id=${el.id}`;
   dispatch({ type: 'SET_SELECTED_PRODUCT_ID', value: el.id });
  };
- const cartHasThisItem =
+ const isOnCart =
   state.shoppingCart &&
   Object.keys(state.shoppingCart).includes(el.id.toString());
- const isNotOnCartButtonStyle =
+ const redButtonStyle =
   'border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
- const isOnCartButtonStyle =
-  'border sm:px-4 sm:py-1 px-6 py-2 text-lg rounded bg-white text-green-700 hover:text-green-600 outline outline-green-700 hover:outline-green-600  font-normal';
 
- const handleAddToCartClick = (e: React.MouseEvent) => {
+ const handleAddToCartClick = (e: React.MouseEvent<HTMLInputElement>) => {
   e.stopPropagation();
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
-  dispatch({ type: 'ADD_ITEM_TO_CART', value: el.id });
+  if (state.shoppingCart === null) return;
+  dispatch({
+   type: 'ADD_ITEM_TO_CART',
+   value: el.id,
+   amount: state.shoppingCart[el.id] + 1,
+  });
  };
  // SECTION - JSX.Element
  return (
@@ -85,21 +90,20 @@ export default function ProductCard({ el }: { el: Product }) {
     )}
    </div>
    <div className="my-4 relative flex px-8 sm:px-3 items-center">
-    <p className="inline text-lg sm:text-base">{el.title}</p>
+    <p className="inline text-lg sm:text-base">
+     {el.title.length > 28 ? `${el.title.slice(0, 28)}...` : el.title}
+    </p>
 
     <span className="font-normal ml-4">{el.rating}</span>
     <span>&#x2730;</span>
    </div>
-   <div className="flex relative items-center  justify-between sm:px-3 px-8 w-full mb-4 sm:mb-2">
+   <div className="flex relative items-center  justify-between sm:px-3 px-8 w-full mb-4 sm:mb-2 gap-2">
     <p className=" text-2xl sm:text-xl font-normal">{el.price}$</p>
+
     <input
      type="button"
-     className={cartHasThisItem ? isOnCartButtonStyle : isNotOnCartButtonStyle}
-     value={
-      cartHasThisItem && state.shoppingCart
-       ? `${state.shoppingCart[el.id.toString()]} in cart`
-       : 'Add to cart'
-     }
+     className={redButtonStyle}
+     value="Add to cart"
      onClick={handleAddToCartClick}
     />
    </div>
