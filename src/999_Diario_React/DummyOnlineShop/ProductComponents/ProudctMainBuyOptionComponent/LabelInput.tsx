@@ -8,7 +8,10 @@ export default function LabelInput({
  handler: React.ChangeEventHandler<HTMLInputElement>;
 }) {
  return (
-  <label htmlFor={`radio${amount}`} className="border pl-2 flex gap-1">
+  <label
+   htmlFor={`radio${amount}`}
+   className="border pl-2 flex gap-1 md:text-base text-xl"
+  >
    <input
     id={`radio${amount}`}
     type="radio"

@@ -1002,6 +1002,14 @@ video {
   max-height: 75vh;
 }
 
+.max-h-\[7rem\] {
+  max-height: 7rem;
+}
+
+.max-h-\[8rem\] {
+  max-height: 8rem;
+}
+
 .min-h-\[30rem\] {
   min-height: 30rem;
 }
@@ -2598,6 +2606,10 @@ video {
     margin-top: 0px;
   }
 
+  .md\:max-h-\[5rem\] {
+    max-height: 5rem;
+  }
+
   .md\:w-60 {
     width: 15rem;
   }
@@ -2628,6 +2640,11 @@ video {
 
   .md\:text-\[10em\] {
     font-size: 10em;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 
