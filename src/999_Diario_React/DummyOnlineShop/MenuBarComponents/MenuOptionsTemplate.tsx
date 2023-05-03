@@ -8,7 +8,6 @@ export default function MenuOptionsTemplate({
  children: JSX.Element;
  elemNumber: number;
 }) {
- // const [menuIsOpen, setMenuIsOpen] = useState(false);
  const state = useMyState();
  const dispatch = useMyDispatch();
  const myRef = useRef<null | HTMLDivElement>(null);

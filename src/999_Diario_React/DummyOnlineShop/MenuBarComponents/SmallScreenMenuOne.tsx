@@ -1,9 +1,11 @@
 import React from 'react';
 import { useMyState } from '../ReducerContext';
-import MenuOne from './MenuOne';
-import MenuOneSmall from './MenuOneSmall';
 
-export default function SmallScreenMenuOne() {
+export default function SmallScreenMenuOne({
+ children,
+}: {
+ children: JSX.Element;
+}) {
  const state = useMyState();
  if (state === null) return <h3>State empty</h3>;
  const hiddenClass =
@@ -18,14 +20,7 @@ export default function SmallScreenMenuOne() {
      : notHiddenClass
    }
   >
-   <MenuOneSmall />
-   {/* <div className="flex flex-wrap gap-2">
-    {state.categories.map((el) => (
-     <button key={el} className="font-normal ">
-      {el}
-     </button>
-    ))}
-   </div> */}
+   {children}
   </div>
  );
 }

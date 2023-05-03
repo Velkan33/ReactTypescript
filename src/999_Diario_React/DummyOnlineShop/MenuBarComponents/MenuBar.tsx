@@ -1,5 +1,5 @@
 import MenuBarButton from './MenuBarButton';
-import { useMyState } from '../ReducerContext';
+import { useMyDispatch, useMyState } from '../ReducerContext';
 import MenuOne from './MenuOne';
 import MenuTwoTest from './MenuTwoTest';
 import useGetScreenWidth, {
@@ -10,9 +10,15 @@ import MenuBarQueryShort from './MenuBarQueryShort';
 import SmallScreenMenuOne from './SmallScreenMenuOne';
 import SmallScreenMenuButton from './SmallScreenMenuButton';
 import MenuOptionsTemplate from './MenuOptionsTemplate';
+import MenuOneSmall from './MenuOneSmall';
+import useHideMenuOnOutsideClick from '../tools/useHideMenuOnOutsideClick';
 
 export default function MenuBar() {
  const state = useMyState();
+ const dispatch = useMyDispatch();
+ // NOTE  Custom hook hide on grayArea
+ useHideMenuOnOutsideClick({ dispatch, dataset: 'grayArea' });
+ /* * ---- * */
  const initialWidth = screenWidthCategories(window.innerWidth);
  const callbackWidth = useGetScreenWidth();
  const width = callbackWidth || initialWidth;
@@ -35,8 +41,14 @@ export default function MenuBar() {
   >
    <div className="flex flex-col bg-white z-40 ">
     <div className="bg-white lg:shadow-md lg:shadow-black/25 flex lg:justify-start justify-between gap-6 px-4 py-2 items-center lg:h-16 h-12">
+     {/** small screens */}
      {width !== 'xl' && <SmallScreenMenuButton />}
-     {width !== 'xl' && categories && <SmallScreenMenuOne />}
+     {width !== 'xl' && categories && (
+      <SmallScreenMenuOne>
+       <MenuOneSmall />
+      </SmallScreenMenuOne>
+     )}
+     {/** larger screens */}
      {width === 'xl' && (
       <div className="flex sm:order-2">
        <MenuBarButton textContent="Categories" id={1} />
