@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import lodash from 'lodash';
 import defaultFetch from './tools/defaultFetch';
 import { Action, Product, StateType } from './tools/typescriptTypes';
 import manageCart from './tools/manageCart';
@@ -102,26 +103,52 @@ function reducer(state: StateType, action: Action) {
   // Create a shopping cart and create it inside local storage
   case 'SET_CART_STATE': {
    manageCart({ type: 'SET_CART' });
-   return { ...state, shoppingCart: {} };
+   return { ...state, shoppingCart: { products: [] } };
   }
   // Add item to shoppingCart and update localstorage
   case 'ADD_ITEM_TO_CART': {
-   if (typeof action.value !== 'string' && typeof action.value !== 'number')
+   if (
+    (typeof action.value !== 'string' && typeof action.value !== 'number') ||
+    typeof action.price !== 'number'
+   )
     return state;
-   manageCart({ type: 'ADD_ITEM_ID', id: action.value, amount: action.amount });
-   return {
-    ...state,
-    shoppingCart: { ...state.shoppingCart, [action.value]: action.amount || 1 },
-   };
+   // TODO do this
+   manageCart({
+    type: 'ADD_ITEM_ID',
+    id: action.value,
+    amount: action.amount,
+    price: action.price,
+    thumbnail: action.urlData,
+   });
+
+   const nextState = lodash.cloneDeep(state);
+   const isOnCart =
+    nextState.shoppingCart &&
+    nextState.shoppingCart.products.find((elem) => elem.id === action.value);
+   if (!nextState.shoppingCart) return nextState;
+   if (!isOnCart) {
+    nextState.shoppingCart.products.push({
+     id: action.value,
+     amount: 1,
+     price: action.price,
+     thumbnail: action.urlData || 'not available',
+    });
+   } else {
+    isOnCart.amount = action.amount || 1;
+   }
+   return nextState;
   }
   // Remove item from shoppingCart and update localstorage
   case 'REMOVE_ITEM_FROM_CART': {
    if (typeof action.value !== 'string' && typeof action.value !== 'number')
     return state;
    manageCart({ type: 'REMOVE_ITEM_ID', id: action.value });
-   const nextCart = { ...state, shoppingCart: { ...state.shoppingCart } };
-   delete nextCart.shoppingCart[action.value];
-   return nextCart;
+   // TODO change to fix, remove from state not working
+   const nextState = lodash.cloneDeep(state);
+   if (nextState.shoppingCart) {
+    nextState.shoppingCart.products.filter((elem) => elem.id !== action.value);
+   }
+   return nextState;
   }
   default:
    return state;

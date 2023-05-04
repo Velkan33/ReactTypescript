@@ -29,10 +29,12 @@ export default function MenuBar() {
  const closedStyle = 'fixed z-10 top-0 right-0 left-0';
  const cartHasItems =
   state.shoppingCart && Object.keys(state.shoppingCart).length > 0;
- const amountOfCartItems =
-  state.shoppingCart && Object.keys(state.shoppingCart).length > 0
-   ? Object.values(state.shoppingCart).reduce((total, value) => total + value)
-   : 0;
+ let amountOfCartItems = 0;
+ if (state.shoppingCart && Object.keys(state.shoppingCart).length > 0) {
+  state.shoppingCart.products.forEach((el) => {
+   amountOfCartItems += el.amount;
+  });
+ }
 
  return (
   <div

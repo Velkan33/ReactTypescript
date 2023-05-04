@@ -17,7 +17,8 @@ export default function ProductMainBuyOptions() {
  //
  const isOnCart =
   state.shoppingCart &&
-  Object.keys(state.shoppingCart).includes(ProductData.id.toString());
+  state.shoppingCart.products.find((el) => el.id === ProductData.id);
+
  const isNotOnCartButtonStyle =
   ' flex-1 mx-auto inline-block rounded-md py-2 hover:bg-[#9c0000] bg-[#cc0000] font-normal text-white';
  const isOnCartButtonStyle =
@@ -26,7 +27,12 @@ export default function ProductMainBuyOptions() {
  const handleAddToCartClick = () => {
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
   if (!isOnCart) {
-   dispatch({ type: 'ADD_ITEM_TO_CART', value: ProductData.id });
+   dispatch({
+    type: 'ADD_ITEM_TO_CART',
+    value: ProductData.id,
+    price: ProductData.price,
+    urlData: ProductData.thumbnail,
+   });
   }
 
   if (isOnCart) setAddMore(!addMore);
@@ -40,6 +46,8 @@ export default function ProductMainBuyOptions() {
     type: 'ADD_ITEM_TO_CART',
     value: ProductData.id,
     amount: Number(e.target.value),
+    price: ProductData.price,
+    urlData: ProductData.thumbnail,
    });
    return;
   }
@@ -97,7 +105,11 @@ export default function ProductMainBuyOptions() {
       onClick={handleAddToCartClick}
      >
       {isOnCart
-       ? `${state.shoppingCart && state.shoppingCart[ProductData.id]} in cart`
+       ? `${
+          state.shoppingCart &&
+          state.shoppingCart.products.find((el) => el.id === ProductData.id)
+           ?.amount
+         } in cart`
        : 'Add to cart'}
       {isOnCart && <span className="text-xl pl-2">↓</span>}
      </button>

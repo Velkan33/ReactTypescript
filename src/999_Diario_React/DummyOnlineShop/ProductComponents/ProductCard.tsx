@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useMyDispatch, useMyState } from '../ReducerContext';
 import { Product } from '../tools/typescriptTypes';
-import LabelDiv from './ProudctMainBuyOptionComponent/LabelDiv';
-import LabelInput from './ProudctMainBuyOptionComponent/LabelInput';
 
 export default function ProductCard({ el }: { el: Product }) {
  const { ref, inView } = useInView();
@@ -14,7 +12,6 @@ export default function ProductCard({ el }: { el: Product }) {
    ? state.urlToFetch
    : 'https://dummyjson.com/products?limit=10&skip=';
  let elemToSkip = 0;
- // LINK elemToSkip is to detect
  if (state)
   elemToSkip = state.allProducts.findIndex((elem) => elem.id === el.id);
  // ANCHOR - Fetch IntersectionObserver
@@ -22,7 +19,6 @@ export default function ProductCard({ el }: { el: Product }) {
   let ignore = false;
 
   if (!ignore && inView && dispatch) {
-   // need to find the id in the allProducts array.
    fetch(urlToFetch + (elemToSkip + 4))
     .then((res) => res.json())
     .then((json) => dispatch({ type: 'ADD_PRODUCTS', data: json.products }));
@@ -42,9 +38,10 @@ export default function ProductCard({ el }: { el: Product }) {
   window.location.hash = `${el.title.replaceAll(' ', '_')}/id=${el.id}`;
   dispatch({ type: 'SET_SELECTED_PRODUCT_ID', value: el.id });
  };
+
  const isOnCart =
   state.shoppingCart &&
-  Object.keys(state.shoppingCart).includes(el.id.toString());
+  state.shoppingCart.products.find((elem) => elem.id === el.id);
  const redButtonStyle =
   'border bg-[#cc0000] hover:bg-[#ac0000] text-white sm:px-4 sm:py-1 px-6 py-2 text-lg rounded';
  const onCartButtonStyle =
@@ -52,11 +49,13 @@ export default function ProductCard({ el }: { el: Product }) {
  const handleAddToCartClick = (e: React.MouseEvent<HTMLInputElement>) => {
   e.stopPropagation();
   if (state.shoppingCart === null) dispatch({ type: 'SET_CART_STATE' });
-  if (state.shoppingCart === null) return;
+
   dispatch({
    type: 'ADD_ITEM_TO_CART',
    value: el.id,
-   amount: state.shoppingCart[el.id] + 1,
+   amount: isOnCart ? isOnCart.amount + 1 : 1,
+   price: el.price,
+   urlData: el.thumbnail,
   });
  };
  // SECTION - JSX.Element
