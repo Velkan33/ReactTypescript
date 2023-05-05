@@ -146,7 +146,9 @@ function reducer(state: StateType, action: Action) {
    // TODO change to fix, remove from state not working
    const nextState = lodash.cloneDeep(state);
    if (nextState.shoppingCart) {
-    nextState.shoppingCart.products.filter((elem) => elem.id !== action.value);
+    nextState.shoppingCart.products = nextState.shoppingCart.products.filter(
+     (elem) => elem.id !== action.value
+    );
    }
    return nextState;
   }
