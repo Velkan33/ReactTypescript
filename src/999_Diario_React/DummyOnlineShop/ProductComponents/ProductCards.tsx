@@ -12,7 +12,7 @@ export default function ProductCards() {
   'w-full px-4 lg:mt-16 mt-24  h-full grid  place-items-center gap-4 gap-y-8 py-8';
  if (allProducts.length > 0)
   ProductCardsDivClassName +=
-   ' [grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))]';
+   ' [grid-template-columns:repeat(auto-fit,minmax(20rem,1fr))]';
  return (
   <>
    {loading && (

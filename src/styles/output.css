@@ -2222,6 +2222,30 @@ video {
   grid-template-columns: repeat(auto-fill,minmax(15rem,1fr));
 }
 
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(18rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(18rem,1fr));
+}
+
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(20rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(20rem,1fr));
+}
+
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(19rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(19rem,1fr));
+}
+
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(22rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(22rem,1fr));
+}
+
+.\[grid-template-columns\:repeat\(auto-fill\2c minmax\(10rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fill,minmax(10rem,1fr));
+}
+
+.\[grid-template-columns\:repeat\(auto-fit\2c minmax\(20rem\2c 1fr\)\)\] {
+  grid-template-columns: repeat(auto-fit,minmax(20rem,1fr));
+}
+
 .placeholder\:text-white::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
