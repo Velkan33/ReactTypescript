@@ -91,7 +91,7 @@ export default function ProductCard({ el }: { el: Product }) {
    </div>
    <div className="my-4 relative flex px-8 sm:px-3 items-center">
     <p className="inline text-lg sm:text-base">
-     {el.title.length > 28 ? `${el.title.slice(0, 28)}...` : el.title}
+     {el.title.length > 24 ? `${el.title.slice(0, 24)}...` : el.title}
     </p>
 
     <span className="font-normal ml-4">{el.rating}</span>
