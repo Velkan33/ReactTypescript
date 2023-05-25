@@ -6,35 +6,6 @@ import { InitialForm } from './tools/TSTypes';
 
 const initialForm = { name: '', email: '', subject: '', comments: '' };
 
-const validationsForm = (form: InitialForm) => {
- const errorObject = { name: '', email: '', subject: '', comments: '' };
- // console.log(form.name);
- if (!/^[a-zA-Z0-9]*$/.test(form.name)) {
-  errorObject.name =
-   'El nombre solo puede estar compuesto por letras y numeros';
- } else {
-  errorObject.name = '';
- }
- if (!/^[a-zA-Z0-9]*$/.test(form.subject)) {
-  errorObject.subject =
-   'El asunto solo puede estar compuesto por letras y numeros';
- } else {
-  errorObject.subject = '';
- }
- if (
-  form.email &&
-  !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-   form.email
-  )
- ) {
-  errorObject.email =
-   'El email debe ser un email valido, ejemplo john@gmail.com';
- } else {
-  errorObject.email = '';
- }
- return errorObject;
-};
-
 const headerClassName = 'text-3xl  font-sans';
 const inputClassName =
  'border block my-2 w-full shadow-md focus:shadow-none hover:shadow-none transition duration-300 rounded px-1';
@@ -55,7 +26,7 @@ export default function ContactForm3() {
   handleChange,
   handleBlur,
   handleSubmit,
- } = useForm(initialForm, validationsForm);
+ } = useForm(initialForm);
  return (
   <div className={formDivContainer}>
    <h2 className={headerClassName}>Formulario de contacto</h2>
@@ -72,6 +43,7 @@ export default function ContactForm3() {
      onBlur={handleBlur}
      onChange={handleBlur}
      value={form.name}
+     title="Escribe aqui tu nombre. Debe estar compuesto por letras y numeros"
      required
     />{' '}
     <p
@@ -84,13 +56,18 @@ export default function ContactForm3() {
      {errors && errors.name}
     </p>
     <input
-     className={inputClassName}
+     className={
+      errors && errors.email
+       ? `${inputClassName} outline-2 outline-red-600 border-2 border-red-600`
+       : inputClassName
+     }
      type="text"
      name="email"
      placeholder="Escribe tu email"
      onBlur={handleBlur}
      onChange={handleChange}
      value={form.email}
+     title="Escribe aqui tu email. Debe ser un email valido, ejemplo: john@gmail.com"
      required
     />{' '}
     <p
@@ -103,32 +80,44 @@ export default function ContactForm3() {
      {errors && errors.email}
     </p>
     <input
-     className={inputClassName}
+     className={
+      errors && errors.subject
+       ? `${inputClassName} outline-2 outline-red-600 border-2 border-red-600`
+       : inputClassName
+     }
      type="text"
      name="subject"
      placeholder="Escribe el asunto"
      onBlur={handleBlur}
      onChange={handleBlur}
      value={form.subject}
+     maxLength={51}
+     title="Escribe aqui el asunto a tratar. Debe tener un maximo de 50 caracteres"
      required
     />
     <p
      className={
       errors && errors.subject
-       ? `${errorMessageClass} animate-slideIn `
+       ? `${errorMessageClass} animate-slideIn`
        : `${errorMessageClass} hidden before:hidden`
      }
     >
      {errors && errors.subject}
     </p>
     <textarea
-     className={textAreaClassName}
+     className={
+      errors && errors.comments
+       ? `${textAreaClassName} outline-2 outline-red-600 border-2 border-red-600`
+       : textAreaClassName
+     }
      name="comments"
      rows={5}
      placeholder="Escribe tus comentarios"
      onBlur={handleBlur}
      onChange={handleBlur}
      value={form.comments}
+     maxLength={256}
+     title="Escribe aqui tus comentarios. Debe tener un maximo de 255 caracteres"
      required
     />
     <p

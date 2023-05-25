@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { Errors, InitialForm } from '../tools/TSTypes';
+import validationsForm from '../helpers/formValidation';
 
-type ValidateForm = (form: InitialForm) => Errors;
-
-export const useForm = (
- initialForm: InitialForm,
- validationForm: ValidateForm
-) => {
+export const useForm = (initialForm: InitialForm) => {
  const [form, setForm] = useState(initialForm);
  const [errors, setErrors] = useState<null | Errors>(null);
  const [loading, setLoading] = useState(false);
@@ -19,6 +15,9 @@ export const useForm = (
  ) => {
   const nextForm = { ...form, [e.target.name]: e.target.value };
   setForm(nextForm);
+  if (errors && errors.email) {
+   setErrors(validationsForm(nextForm));
+  }
  };
  const handleBlur = (
   e:
@@ -27,7 +26,7 @@ export const useForm = (
  ) => {
   const nextForm = { ...form, [e.target.name]: e.target.value };
   setForm(nextForm);
-  setErrors(validationForm(nextForm));
+  setErrors(validationsForm(nextForm));
  };
  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
