@@ -4,23 +4,25 @@ export default function VentanaModal({
  closeModal,
  children,
 }: {
- closeModal: React.MouseEventHandler<HTMLButtonElement>;
+ closeModal: CallableFunction;
  children: JSX.Element;
 }) {
  const myRef = useRef(null);
  useEffect(() => {
   function close(e: MouseEvent) {
    if (e.target === myRef.current) {
-    closeModal(e);
+    closeModal();
+    console.log('listener de cerrar ventana modal en click on gray area');
    }
   }
 
-  document.addEventListener('click', (e) => close(e));
+  document.addEventListener('click', close);
 
   return () => {
    document.removeEventListener('click', close);
+   console.log('eliminado el listener');
   };
- }, [closeModal]);
+ });
 
  const marco = 'rounded-b overflow-hidden';
  const modalContainer = ' max-w-[20rem] text-black  bg-white rounded relative';
@@ -31,7 +33,7 @@ export default function VentanaModal({
  return (
   <div className={modal} ref={myRef}>
    <div className={modalContainer}>
-    <button type="button" className={modalClose} onClick={closeModal}>
+    <button type="button" className={modalClose} onClick={() => closeModal()}>
      <span className="absolute">&times;</span>
     </button>
     <div className={marco}>{children}</div>
