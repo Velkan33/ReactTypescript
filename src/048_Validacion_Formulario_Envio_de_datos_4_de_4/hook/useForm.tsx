@@ -6,7 +6,7 @@ export const useForm = (initialForm: InitialForm) => {
  const [form, setForm] = useState(initialForm);
  const [errors, setErrors] = useState<null | Errors>(null);
  const [loading, setLoading] = useState(false);
- const [response, setResponse] = useState<null | string>(null);
+ const [response, setResponse] = useState<null | boolean>(null);
 
  const handleChange = (
   e:
@@ -30,6 +30,7 @@ export const useForm = (initialForm: InitialForm) => {
  };
  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   setLoading(true);
+  setResponse(false);
   fetch('https://formsubmit.co/ajax/spanboxfyou@gmail.com', {
    method: 'POST',
    body: JSON.stringify({
@@ -45,7 +46,11 @@ export const useForm = (initialForm: InitialForm) => {
    headers: { 'Content-type': 'application/json' },
   }).then(() => {
    setLoading(false);
-   setResponse('ok');
+   setResponse(true);
+   setTimeout(() => {
+    setResponse(false);
+   }, 5000);
+   setForm(initialForm);
   });
   e.preventDefault();
  };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from './hook/useForm';
 import Loader from '../041_Buscador_De_Canciones:Renderizado_de_UI_y_estilos_CSS(5_de_5)/Components/Loader';
 import ErrorMessage from './ErrorMessage';
@@ -27,6 +27,17 @@ export default function ContactForm4() {
   handleBlur,
   handleSubmit,
  } = useForm(initialForm);
+ // const [isVisible, setIsVisible] = useState(false);
+ // useEffect(() => {
+ //  if (response) setIsVisible(true);
+ //  const timeOut = setTimeout(() => {
+ //   // if (response) {
+ //   setIsVisible(false);
+ //   // }
+ //  }, 2000);
+
+ //  return () => clearTimeout(timeOut);
+ // }, [response]);
  return (
   <div className={formDivContainer}>
    <h2 className={headerClassName}>Formulario de contacto</h2>
@@ -130,10 +141,10 @@ export default function ContactForm4() {
      {errors && errors.comments}
     </p>
     {loading && <Loader />}
-    {!loading && (
+    {!loading && !response && (
      <input className={buttonClassName} type="submit" value="Enviar" />
     )}
-    {/* {errors && <ErrorMessage msg="some error" />} */}
+    {response && <ErrorMessage msg="El formulario fue enviado" />}
    </form>
   </div>
  );
