@@ -8,6 +8,7 @@ import React from 'react';
 // import ContactForm2 from './046_Validacion_Formulario_Programacion_de_Eventos_2_de_4 /ContactForm';
 
 import ContainerModalPortal from './052_Portales/ContainerModal';
+import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
 
 function App() {
  // const SongFinderStyle1 =
@@ -22,7 +23,8 @@ function App() {
    {/* <SelectsAnidados /> */}
    {/* <ContactForm4 /> */}
    {/* <ContainerModal3 /> */}
-   <ContainerModalPortal />
+   {/* <ContainerModalPortal /> */}
+   <ReactRouterV6Course />
   </div>
  );
 }
