@@ -10,7 +10,7 @@
   "test": "vitest"
  },
  "dependencies": {
-  "caniuse-lite": "^1.0.30001481",
+  "caniuse-lite": "^1.0.30001494",
   "immer": "^9.0.19",
   "jshint": "^2.13.6",
   "lodash": "^4.17.21",

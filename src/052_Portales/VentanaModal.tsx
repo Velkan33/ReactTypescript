@@ -12,7 +12,6 @@ export default function VentanaModal({
   function close(e: MouseEvent) {
    if (e.target === myRef.current) {
     closeModal();
-    console.log('listener de cerrar ventana modal en click on gray area');
    }
   }
 
@@ -20,7 +19,6 @@ export default function VentanaModal({
 
   return () => {
    document.removeEventListener('click', close);
-   console.log('eliminado el listener');
   };
  });
 
