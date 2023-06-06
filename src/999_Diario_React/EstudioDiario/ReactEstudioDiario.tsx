@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EstudioDiario() {
+export default function ReactEstudioDiario() {
  return (
   <div className="font-normal text-base px-2">
    <p
@@ -31,6 +31,22 @@ After the return insert the ReactDom.createPortal function that will accept 2-3 
                 <Route path="/anotherPath" element={Component2}>`}
    >
     How do we create a Link on ReactRouter
+   </p>
+   <p
+    title={`const myArray = ['Ana','Sofia','Vero']
+           const newArray = myArray.with(index, newValue)
+           const newArray = myArray.toSorted()
+           const newArray = myArray.toReversed()
+           const newArray = myArray.toSpliced(0,1,'Kevin')`}
+   >
+    What are the 4 new array methods on javascript
+   </p>
+   <p
+    title={`const controler = new AbortController()
+            fetch(url, { signal : controller.signal })
+            return () => controler.abort()`}
+   >
+    How do we implement a abortControler
    </p>
   </div>
  );
