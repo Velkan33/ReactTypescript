@@ -1,5 +1,5 @@
 import React from 'react';
-import viteLogo from '../../../public/vite.svg';
+import viteLogo from '../../assets/vite.svg';
 import reactLogo from '../../assets/react.svg';
 import javascriptLogo from '../../assets/logo-javascript.svg';
 import typescriptLogo from '../../assets/typescript-seeklogo.com.svg';

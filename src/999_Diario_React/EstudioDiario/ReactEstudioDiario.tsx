@@ -14,8 +14,8 @@ After the return insert the ReactDom.createPortal function that will accept 2-3 
    <p
     title={`<BrowserRouter>
               <Routes>
-                <Route path="/somePath" element={Component1}>
-                <Route path="/anotherPath" element={Component2}>`}
+                <Route path="/somePath" element={Component1} />
+                <Route path="/anotherPath" element={Component2} />`}
    >
     How do we envolve all the base ReactRouter structure
    </p>
@@ -27,10 +27,43 @@ After the return insert the ReactDom.createPortal function that will accept 2-3 
                 </Link>
               </nav>
               <Routes>
-                <Route path="/somePath" element={Component1}>
-                <Route path="/anotherPath" element={Component2}>`}
+                <Route path="/somePath" element={Component1} />
+                <Route path="/anotherPath" element={Component2} />`}
    >
-    How do we create a Link on ReactRouter
+    How do we create a Link on ReactRouter, and what`s the difference betwen a
+    Link and a NavLink
+   </p>
+
+   <p
+    title={`<BrowserRouter>
+              <nav>
+                <Link to="/pathToLink">
+                 {buttonComponent}
+                </Link>
+              </nav>
+              <Routes>
+                <Route path="/somePath" element={Component1} /> 
+                <Route path="*" element={
+                <ErrorComponent/>} />`}
+   >
+    How do we manage an inexistent link address
+   </p>
+   <p
+    title={`<BrowserRouter>
+              <nav>
+                <Link to="/pathToLink">
+                 {buttonComponent}
+                </Link>
+              </nav>
+              <Routes>
+                <Route path="/newPath" element={Component1} />
+                <Route path="/oldPath" element={<Navigate to="/newPath />} />`}
+   >
+    How do we redirect an old link or an old address to a new one.
+   </p>
+   <p title="You could use the 'Link' component inside any component, and the ">
+    How you create a dynamic url, and how do you use that url on the Routes
+    component.
    </p>
    <p
     title={`const myArray = ['Ana','Sofia','Vero']
