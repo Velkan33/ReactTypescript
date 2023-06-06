@@ -4,7 +4,7 @@ import Header from './Header';
 /* The NavLink component redirect to another component inside the single page application, and NavLink do the same with the difference that NavLink have a functionality that add style to the active one, ( this is useful for a Nav bar link) */
 export default function Menu() {
  const buttonStyle =
-  'bg-slate-900 text-white hover:underline underline-offset-[2px] decoration-1 hover:shadow-none shadow transition font-normal rounded px-2';
+  'bg-slate-900 text-white  decoration-1 hover:shadow-none shadow transition font-normal rounded px-2 hover:shadow-md hover:shadow-black/40 hover:-translate-y-0.5';
  return (
   <div className="flex justify-between items-center px-2 py-2 shadow sticky top-0">
    <Header />

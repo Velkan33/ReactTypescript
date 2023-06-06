@@ -28,7 +28,6 @@ export default function ReactRouterV6Course() {
   { id: 4, name: 'Product4', price: '400' },
   { id: 5, name: 'Product5', price: '500' },
  ];
-
  return (
   <BrowserRouter>
    <Menu />
@@ -44,7 +43,7 @@ export default function ReactRouterV6Course() {
      {/* NOTE This */}
      <Route path="/products" element={<Products />} />
      {/** END */}
-     {/* NOTE: This path is different, the ':id' detect the :id value and send it as param to the 'element' through 'useParams' hook  */}
+     {/* NOTE: This path is different, the ':id' detect the after '/' value and send it as param to the 'element' through 'useParams' hook in an object with a key named by the :value, example in this case {id: after'/'value }  */}
      <Route path="/products/:id" element={<ProductDetail />} />
      {/** END */}
      {/* NOTE This Route is used to indicate what component should call in case there will no coincidence in the paths */}

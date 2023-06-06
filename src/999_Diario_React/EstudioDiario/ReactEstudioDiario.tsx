@@ -61,7 +61,16 @@ After the return insert the ReactDom.createPortal function that will accept 2-3 
    >
     How do we redirect an old link or an old address to a new one.
    </p>
-   <p title="You could use the 'Link' component inside any component, and the ">
+   <p
+    title="You could use the 'Link' component inside any component, and then you could detect the 'product/2' number 2 with ':' and the key you will give it 'product/:id' on the 'Routes'. After that you can detect the value of the 'id' key with the custom hook 'useParams',that will return {id: 2}.
+
+    <Link to={/products/{dinamicValue}} >2</Link>
+    //-----//----//----//
+    <Route path='/products/:id' element={<ProductDetail />} />
+    //----//----//----//
+    console.log(useParams()) => {id: dinamicValue}
+"
+   >
     How you create a dynamic url, and how do you use that url on the Routes
     component.
    </p>
