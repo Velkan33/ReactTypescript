@@ -8,7 +8,7 @@ import React from 'react';
 // import ContactForm2 from './046_Validacion_Formulario_Programacion_de_Eventos_2_de_4 /ContactForm';
 
 import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
-import EstudioDiario from './999_Diario_React/EstudioDiario/EstudioDiario';
+import EstudioDiario from './999_Diario_React/EstudioDiario/ReactEstudioDiario';
 
 function App() {
  // const SongFinderStyle1 =
@@ -25,7 +25,6 @@ function App() {
    {/* <ContainerModal3 /> */}
    {/* <ContainerModalPortal /> */}
    <ReactRouterV6Course />
-   <EstudioDiario />
   </div>
  );
 }

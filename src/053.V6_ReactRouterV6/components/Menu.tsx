@@ -25,6 +25,11 @@ export default function Menu() {
       Contact
      </button>
     </Link>
+    <Link to="/react">
+     <button className={buttonStyle} type="button">
+      React
+     </button>
+    </Link>
    </nav>
   </div>
  );
