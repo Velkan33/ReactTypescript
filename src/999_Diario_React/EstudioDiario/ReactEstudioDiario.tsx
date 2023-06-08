@@ -85,6 +85,39 @@ NavLink have a parameter 'isActive' that can be used to apply styles.
     component.
    </p>
    <p
+    title={`const navigate = useNavigate;
+           onClick={() => navigate(-1)};
+           The parameter pased to navigate
+           could be any number indicating the 
+           amount of pages, '-' for back and 
+           positive to forward.`}
+   >
+    How do we wire a button to go back one page, using a custom hook from
+    react-router library.
+   </p>
+   <p
+    title={`<Route path="/services" element={<Services />}>
+                     {/** index indicate that the component will be called the same path than the parent*/}
+                 <Route index element={<ServicesHome />} />
+                     {/** Next path also could be writen just, guarantee, because he asume it comes after services */}
+                 <Route path="/services/guarantee" element={<ServicesGuarantee />} />
+
+//----//----//----//
+{/** The Outlet component is like the children parameter, there it will call the component that you call that is nested*/}
+
+import {Outlet} from 'react-router-dom'
+function Services(){
+       return ( <>
+                  <h1>This is the service component</h1>
+                  <Outlet/>
+                </>)
+}
+     </Route>
+`}
+   >
+    How do we create routes and subroutes using route nesting.
+   </p>
+   <p
     title={`const myArray = ['Ana','Sofia','Vero']
            const newArray = myArray.with(index, newValue)
            const newArray = myArray.toSorted()

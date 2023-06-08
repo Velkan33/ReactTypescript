@@ -27,9 +27,9 @@ export default function Menu() {
       About
      </button>
     </Link>
-    <Link to="/contact">
+    <Link to="/services">
      <button className={buttonStyle} type="button">
-      Contact
+      Services
      </button>
     </Link>
     <Link to="/products">

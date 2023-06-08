@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Products() {
- const products = [
-  { id: 1, name: 'Product1', price: '100' },
-  { id: 2, name: 'Product2', price: '200' },
-  { id: 3, name: 'Product3', price: '300' },
-  { id: 4, name: 'Product4', price: '400' },
-  { id: 5, name: 'Product5', price: '500' },
- ];
+export default function Products({
+ products,
+}: {
+ products: { id: number; name: string; price: string }[];
+}) {
  return (
   <section>
    <ul>
