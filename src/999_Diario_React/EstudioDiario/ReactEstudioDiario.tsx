@@ -28,7 +28,17 @@ After the return insert the ReactDom.createPortal function that will accept 2-3 
               </nav>
               <Routes>
                 <Route path="/somePath" element={Component1} />
-                <Route path="/anotherPath" element={Component2} />`}
+                <Route path="/anotherPath" element={Component2} />
+
+//----//----//----//
+NavLink have a parameter 'isActive' that can be used to apply styles.
+
+<NavLink
+     to="/react"
+     className={({ isActive }) =>
+      isActive ? ' shadow-md shadow-black/40 rounded -translate-y-0.5' : ''
+     }
+    >`}
    >
     How do we create a Link on ReactRouter, and what`s the difference betwen a
     Link and a NavLink
