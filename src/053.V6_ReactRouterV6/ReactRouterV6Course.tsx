@@ -27,6 +27,8 @@ import ProductDetail from './pages/ProductDetail';
 import Services from './pages/Services';
 import ServicesGuarantee from './pages/ServicesGuarantee';
 import ServicesHome from './pages/ServicesHome';
+import ServicesList from './pages/ServicesList';
+import ServiceDisplay from './pages/ServiceDisplay';
 
 // BrowserRouter envuelve el componente donde se usara el Router, Routes envuelve las rutas, Route van a ser las rutas, Link van a ser los link de las rutas,
 // STUB Here start the Main component
@@ -38,6 +40,13 @@ export default function ReactRouterV6Course() {
   { id: 3, name: 'Product3', price: '300' },
   { id: 4, name: 'Product4', price: '400' },
   { id: 5, name: 'Product5', price: '500' },
+ ]);
+ const [services, setServices] = React.useState([
+  { id: 1, name: 'Service1', price: '1000' },
+  { id: 2, name: 'Service2', price: '2000' },
+  { id: 3, name: 'Service3', price: '3000' },
+  { id: 4, name: 'Service4', price: '4000' },
+  { id: 5, name: 'Service5', price: '5000' },
  ]);
  return (
   <BrowserRouter>
@@ -62,8 +71,19 @@ export default function ReactRouterV6Course() {
       <Route index element={<ServicesHome />} />
       {/** This path also could be writen just, guarantee, because he asume it comes after services */}
       <Route path="/services/guarantee" element={<ServicesGuarantee />} />
+
+      <Route
+       path="services_list"
+       element={<ServicesList services={services} />}
+      >
+       <Route
+        path="service/:id"
+        element={<ServiceDisplay services={services} />}
+       />
+      </Route>
      </Route>
      {/** END */}
+
      {/* NOTE This Route is used to indicate what component should call in case there will no coincidence in the paths */}
      <Route path="/*" element={<Error404 />} />
      {/** END */}

@@ -20,8 +20,14 @@ export default function Services() {
     <Link to="/services" className="border px-1 rounded bg-slate-200 m-1">
      Home
     </Link>
-    <Link to="/services/guarantee" className="px-1 rounded border bg-slate-200">
+    <Link
+     to="/services/guarantee"
+     className="px-1 mx-1 rounded border bg-slate-200"
+    >
      Guarantee
+    </Link>
+    <Link to="services_list" className="px-1 bg-slate-200 mx-1 rounded border">
+     Services List
     </Link>
    </nav>
    {/** End Nav Section */}
