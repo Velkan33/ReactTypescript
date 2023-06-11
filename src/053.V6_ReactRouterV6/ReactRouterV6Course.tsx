@@ -15,6 +15,9 @@ import {
  useNavigate,
  // eslint-disable-next-line @typescript-eslint/no-unused-vars
  Outlet,
+ // eslint-disable-next-line @typescript-eslint/no-unused-vars
+ // Se usa en vez de BrowserRouter cuando se tiene un hosting compartido.
+ HashRouter,
 } from 'react-router-dom';
 import ContextProvider from './context/ContextProvider';
 import Home from './pages/Home';
@@ -29,6 +32,8 @@ import ServicesGuarantee from './pages/ServicesGuarantee';
 import ServicesHome from './pages/ServicesHome';
 import ServicesList from './pages/ServicesList';
 import ServiceDisplay from './pages/ServiceDisplay';
+import Login from './pages/Login';
+import PrivateAuth from './pages/Private';
 
 // BrowserRouter envuelve el componente donde se usara el Router, Routes envuelve las rutas, Route van a ser las rutas, Link van a ser los link de las rutas,
 // STUB Here start the Main component
@@ -48,6 +53,10 @@ export default function ReactRouterV6Course() {
   { id: 4, name: 'Service4', price: '4000' },
   { id: 5, name: 'Service5', price: '5000' },
  ]);
+
+ let auth: boolean | null = true;
+ auth = true;
+
  return (
   <BrowserRouter>
    <Menu />
@@ -59,9 +68,7 @@ export default function ReactRouterV6Course() {
      <Route path="/acerca" element={<Navigate to="/about" />} />
      {/** END */}
      <Route path="/React" element={<ReactEstudioDiario />} />
-     {/* NOTE This */}
      <Route path="/products" element={<Products products={products} />} />
-     {/** END */}
      {/* NOTE: This path is different, the ':id' detect the after '/' value and send it as param to the 'element' through 'useParams' hook in an object with a key named by the :value, example in this case {id: after'/'value }  */}
      <Route
       path="/products/:id"
@@ -69,17 +76,14 @@ export default function ReactRouterV6Course() {
      />
      <Route path="/services" element={<Services />}>
       <Route index element={<ServicesHome />} />
-      {/** This path also could be writen just, guarantee, because he asume it comes after services */}
+      {/** This path also could be writen just, 'guarantee', because it asume it comes after services for being a nested route  */}
       <Route path="/services/guarantee" element={<ServicesGuarantee />} />
 
       <Route
        path="services_list"
        element={<ServicesList services={services} />}
       >
-       <Route
-        path="service/:id"
-        element={<ServiceDisplay services={services} />}
-       />
+       <Route path=":id" element={<ServiceDisplay services={services} />} />
       </Route>
      </Route>
      {/** END */}
@@ -87,6 +91,12 @@ export default function ReactRouterV6Course() {
      {/* NOTE This Route is used to indicate what component should call in case there will no coincidence in the paths */}
      <Route path="/*" element={<Error404 />} />
      {/** END */}
+     <Route path="/login" element={<Login />} />
+     {/* Conditionally calling the Private if there is an authentication, if not it will send to the login page */}
+     <Route
+      path="/private"
+      element={auth ? <PrivateAuth /> : <Navigate to="/login" />}
+     />
     </Routes>
    </ContextProvider>
   </BrowserRouter>

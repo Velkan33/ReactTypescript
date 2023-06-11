@@ -9,7 +9,7 @@ export default function ServiceDisplay({
  const actualServiceId = useParams();
 
  const actualService = services.find(
-  (param) => actualServiceId.id === param.id.toString()
+  (param) => actualServiceId.id?.slice(7) === param.id.toString()
  );
  if (actualService === undefined) return <p>Service Id undefined</p>;
  return (

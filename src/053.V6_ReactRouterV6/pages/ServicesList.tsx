@@ -10,7 +10,7 @@ export default function ServicesList({
   <>
    <p>Services</p>
    {services.map((el) => (
-    <Link to={`service/${el.id}`} key={`service${el.id}`}>
+    <Link to={`service${el.id}`} key={`service${el.id}`}>
      <button className="px-2 py-1 rounded bg-slate-200 m-1" type="button">
       {el.name}
      </button>
