@@ -117,6 +117,9 @@ function Services(){
    >
     How do we create routes and subroutes using route nesting.
    </p>
+   <p title="We can use 'HashRouter' instead of 'BrowserRouter' to give access to those saved Url, other way unable to access">
+    How we solve routers url, that can not be wired via backend
+   </p>
    <p
     title={`const myArray = ['Ana','Sofia','Vero']
            const newArray = myArray.with(index, newValue)
