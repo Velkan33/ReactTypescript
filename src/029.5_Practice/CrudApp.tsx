@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import { useImmer } from "use-immer";
-import { Classes } from "../assets/Classes";
-import { CrudForm } from "./CrudForm";
-import CrudTable, { DataType } from "./CrudTable";
-import { initialDb } from "./initialDb";
+import React, { useState } from 'react';
+import { useImmer } from 'use-immer';
+import { CrudForm } from './CrudForm';
+import CrudTable, { DataType } from './CrudTable';
+import initialDb from './initialDb';
+import { Classes } from '../assets/Classes';
 
 export default function CrudApp() {
- let classes = Classes();
+ const classes = Classes();
  const [db, updateDb] = useImmer(initialDb);
  const [dataToEdit, setDataToEdit] = useImmer<DataType>({
-  nombre: "",
-  constelacion: "",
+  nombre: '',
+  constelacion: '',
  });
  const createData = (data: DataType) => {
-  let nextId = db[db.length - 1]?.id + 1;
-
+  let nextId = 1;
+  if (db.length >= 1) {
+   nextId = db[db.length - 1].id + 1;
+  }
   updateDb((draft) => {
    draft.push({
     nombre: data.nombre,
@@ -34,7 +36,7 @@ export default function CrudApp() {
  };
  const deleteData = (id: number) => {
   updateDb((draft) => draft.filter((el) => el.id !== id));
-  setDataToEdit({ nombre: "", constelacion: "", id: null });
+  setDataToEdit({ nombre: '', constelacion: '', id: null });
  };
  return (
   <>

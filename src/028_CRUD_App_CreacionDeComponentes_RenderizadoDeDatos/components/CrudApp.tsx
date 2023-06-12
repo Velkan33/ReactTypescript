@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useImmer } from "use-immer";
-import { Classes } from "../../assets/Classes";
-import { CrudForm } from "./CrudForm";
-import CrudTable from "./CrudTable";
-import { initialDb } from "./initialDb";
+import React, { useState } from 'react';
+import { useImmer } from 'use-immer';
+import { Classes } from '../../assets/Classes';
+import { CrudForm } from './CrudForm';
+import CrudTable from './CrudTable';
+import { initialDb } from './initialDb';
 
 export default function CrudApp() {
- let classes = Classes();
+ const classes = Classes();
  const [db, updateDb] = useImmer(initialDb);
 
  return (

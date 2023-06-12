@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Classes } from "../assets/Classes";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Classes } from '../assets/Classes';
 
-interface MyProps {}
+type MyProps = object;
 interface MyState {
  list: (string | JSX.Element)[];
 }
@@ -23,14 +23,14 @@ export default class PeticionesAsincronasMy extends Component<
  }
 
  componentDidMount(): void {
-  let lista: JSX.Element[] = [];
+  const lista: JSX.Element[] = [];
   const Ax = async () => {
    try {
-    let ax = await axios({
-     method: "GET",
-     url: "http://localhost:6655/santos",
+    const ax = await axios({
+     method: 'GET',
+     url: 'http://localhost:6655/santos',
     });
-    let data = await ax.data;
+    const data = await ax.data;
     console.log(data);
     data.forEach((el: AxiosDataElem) => {
      lista.push(<li key={el.nombre}>{el.nombre}</li>);
@@ -44,7 +44,7 @@ export default class PeticionesAsincronasMy extends Component<
  }
 
  render(): React.ReactNode {
-  let classes = Classes();
+  const classes = Classes();
   return (
    <>
     <h1 className={classes.h1}>Hola Mundo</h1>

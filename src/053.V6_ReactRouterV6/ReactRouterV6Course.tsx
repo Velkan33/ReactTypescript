@@ -58,7 +58,7 @@ export default function ReactRouterV6Course() {
  auth = true;
 
  return (
-  <BrowserRouter>
+  <HashRouter>
    <Menu />
    <ContextProvider>
     <Routes>
@@ -99,6 +99,6 @@ export default function ReactRouterV6Course() {
      />
     </Routes>
    </ContextProvider>
-  </BrowserRouter>
+  </HashRouter>
  );
 }
