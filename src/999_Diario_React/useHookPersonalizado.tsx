@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface MyResponse {
  nombre: string;
@@ -6,6 +6,7 @@ interface MyResponse {
  id: number;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function HookPersonalizado(url: string) {
  const [error, setError] = useState<null | boolean>(null);
  const [isPending, setIsPending] = useState<boolean>(true);
@@ -15,14 +16,14 @@ export function HookPersonalizado(url: string) {
 
  async function RequestHook(arg: string) {
   try {
-   let req = await fetch(url);
+   const req = await fetch(url);
    if (!req.ok)
     throw {
      error: true,
      status: req.status,
-     statusText: req.statusText ? req.statusText : "Ocurrio un error",
+     statusText: req.statusText ? req.statusText : 'Ocurrio un error',
     };
-   let res = await req.json();
+   const res = await req.json();
    Response = await res;
    setIsPending(false);
    setError(false);
