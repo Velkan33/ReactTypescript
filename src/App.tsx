@@ -14,7 +14,7 @@ function App() {
  // const SongFinderStyle1 =
  //  'min-h-screen w-full bg-gradient-to-l from-blue-400 to-violet-400 text-black font-bold';
  // const SongFinderStyle = 'w-full  text-black font-bold';
- const SongFinderStyle = '';
+ const SongFinderStyle = 'w-full h-full flex';
  return (
   <div className={SongFinderStyle}>
    {/* <CrudApi5A /> */}

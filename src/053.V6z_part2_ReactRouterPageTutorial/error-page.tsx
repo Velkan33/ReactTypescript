@@ -11,7 +11,7 @@ export default function ErrorPage() {
  console.error(error);
  return (
   <div id="error-page">
-   <h1>Oops!</h1>
+   <h1 className="text-2xl">Oops!</h1>
    <p>Sorry, an unexpected error has occurred.</p>
    <p>
     <i>{(error as ErrorType).statusText || (error as ErrorType).message}</i>

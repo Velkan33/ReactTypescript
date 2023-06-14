@@ -1,7 +1,18 @@
+import { Link, Outlet, useLoaderData } from 'react-router-dom';
+import { getContacts } from '../tools/contacts';
+import { ContactType } from '../tools/types';
+// className="absolute bottom-0 top-0"
+export async function loader() {
+ const contacts = await getContacts();
+ return { contacts };
+}
+
 export default function Root() {
+ const contacts = useLoaderData();
+ console.log(contacts);
  return (
   <>
-   <div id="sidebar" className="absolute bottom-0 top-0">
+   <div id="sidebar">
     <h1>React Router Contacts</h1>
     <div>
      <form id="search-form" role="search">
@@ -20,17 +31,31 @@ export default function Root() {
      </form>
     </div>
     <nav>
-     <ul>
-      <li>
-       <a href="/contacts/1">Your Name</a>
-      </li>
-      <li>
-       <a href="/contacts/2">Your Friend</a>
-      </li>
-     </ul>
+     {(contacts as ContactType[]).length ? (
+      <ul>
+       {(contacts as ContactType[]).map((contact) => (
+        <li key={contact.id}>
+         <Link to={`contacts/${contact.id}`}>
+          {contact.first || contact.last ? (
+           <>
+            {contact.first}
+            {contact.last}
+           </>
+          ) : (
+           <i>No Name</i>
+          )}{' '}
+         </Link>
+        </li>
+       ))}
+      </ul>
+     ) : (
+      <i>No Contacts</i>
+     )}
     </nav>
    </div>
-   <div id="detail" />
+   <div id="detail">
+    <Outlet />
+   </div>
   </>
  );
 }
