@@ -1,15 +1,21 @@
-import { Link, Outlet, useLoaderData } from 'react-router-dom';
-import { getContacts } from '../tools/contacts';
+import { Link, Outlet, useLoaderData, Form } from 'react-router-dom';
+import { getContacts, createContact } from '../tools/contacts';
 import { ContactType } from '../tools/types';
+
 // className="absolute bottom-0 top-0"
 export async function loader() {
  const contacts = await getContacts();
  return { contacts };
 }
 
+export async function action() {
+ const contact = await createContact();
+ return { contact };
+}
+
 export default function Root() {
- const contacts = useLoaderData();
- console.log(contacts);
+ const contactObject = useLoaderData();
+ const { contacts } = contactObject as { contacts: [] };
  return (
   <>
    <div id="sidebar">
@@ -26,9 +32,9 @@ export default function Root() {
       <div id="search-spinner" aria-hidden hidden />
       <div className="sr-only" aria-live="polite" />
      </form>
-     <form method="post">
+     <Form method="post">
       <button type="submit">New</button>
-     </form>
+     </Form>
     </div>
     <nav>
      {(contacts as ContactType[]).length ? (
@@ -38,8 +44,7 @@ export default function Root() {
          <Link to={`contacts/${contact.id}`}>
           {contact.first || contact.last ? (
            <>
-            {contact.first}
-            {contact.last}
+            {contact.first} {contact.last}
            </>
           ) : (
            <i>No Name</i>

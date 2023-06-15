@@ -1,6 +1,15 @@
 import React from 'react';
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 import { ContactType } from '../tools/types';
+import { getContact } from '../tools/contacts';
+
+export async function loader(param: unknown) {
+ // Solving type issue with param
+ const { params } = param as { params: { contactId: string } };
+ // --//
+ const contact = await getContact(params.contactId);
+ return { contact };
+}
 
 function Favorite({ contact }: { contact: ContactType }) {
  // yes, this is a `let` for later
@@ -19,16 +28,9 @@ function Favorite({ contact }: { contact: ContactType }) {
   </Form>
  );
 }
-export default function Contact({ contact }: { contact: ContactType }) {
- // const contact = {
- //  first: 'Your',
- //  last: 'Name',
- //  avatar: 'https://placekitten.com/g/200/200',
- //  twitter: 'your_handle',
- //  notes: 'Some notes',
- //  favorite: true,
- // };
-
+export default function Contact() {
+ const contactObject = useLoaderData();
+ const { contact } = contactObject as { contact: ContactType };
  return (
   <div id="contact">
    <div>
@@ -66,6 +68,7 @@ export default function Contact({ contact }: { contact: ContactType }) {
     {contact.notes && <p>{contact.notes}</p>}
 
     <div>
+     {/* //This action will just change the URL */}
      <Form action="edit">
       <button type="submit">Edit</button>
      </Form>
