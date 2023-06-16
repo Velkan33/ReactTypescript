@@ -5,7 +5,7 @@ import {
  createBrowserRouter,
  // Create a Component with a param router that will have the created browser router.
  RouterProvider,
- // Return an object with the error that can be used to expose the error
+ // Return an object inside the 'errorElement' component, that is called, this error object can be used to expose the error through statusText or message key.
  useRouteError,
  // This will access the children component to use it inside the parent component
  Outlet,
@@ -17,6 +17,11 @@ import {
  Form,
  // This callback will redirect to a parameter URL (In this app is used as a return on the edit/EditContact component)
  redirect,
+ // This is the type of the action parameters
+ ActionFunctionArgs,
+ // This is similar to Link except that it have parameters isActive and isPending, that can be used to change the className concurrently.
+ NavLink,
+ useNavigation,
 } from 'react-router-dom';
 import './styles/AppStyle.css';
 import Root, {

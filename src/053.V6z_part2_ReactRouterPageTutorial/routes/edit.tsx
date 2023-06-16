@@ -1,21 +1,22 @@
-import { Form, useLoaderData, redirect } from 'react-router-dom';
+import {
+ Form,
+ useLoaderData,
+ redirect,
+ ActionFunctionArgs,
+} from 'react-router-dom';
 import { ContactType } from '../tools/types';
 import { getContact, updateContact } from '../tools/contacts';
-///
+/// This will execute when the form is loaded
 export async function loader(param: unknown) {
+ console.log('formulario cargado');
  const { params } = param as { params: { contactId: string } };
  const contact = await getContact(params.contactId);
 
  return { contact };
 }
 /// Here 'request' will contain the content of the form
-export async function action({
- request,
- params,
-}: {
- request: { formData: () => [] };
- params: { contactId: string };
-}) {
+// This will execute when the form is submit
+export async function action({ request, params }: ActionFunctionArgs) {
  const formData = await request.formData();
  const updates = Object.fromEntries(formData);
  await updateContact(params.contactId, updates);
