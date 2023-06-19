@@ -9,6 +9,7 @@ import React from 'react';
 
 import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
 import AppReactRouterTutorial from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
+import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
 
 function App() {
  // const SongFinderStyle1 =
@@ -26,7 +27,8 @@ function App() {
    {/* <ContainerModal3 /> */}
    {/* <ContainerModalPortal /> */}
    {/* <ReactRouterV6Course /> */}
-   <AppReactRouterTutorial />
+   {/* <AppReactRouterTutorial /> */}
+   <TeslaLandingPage />
   </div>
  );
 }
