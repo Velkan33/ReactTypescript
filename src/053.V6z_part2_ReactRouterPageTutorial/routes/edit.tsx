@@ -3,6 +3,7 @@ import {
  useLoaderData,
  redirect,
  ActionFunctionArgs,
+ Link,
 } from 'react-router-dom';
 import { ContactType } from '../tools/types';
 import { getContact, updateContact } from '../tools/contacts';
@@ -18,7 +19,16 @@ export async function loader(param: unknown) {
 // This will execute when the form is submit
 export async function action({ request, params }: ActionFunctionArgs) {
  const formData = await request.formData();
- const updates = Object.fromEntries(formData);
+ let updates = Object.fromEntries(formData);
+ // Remove accidental spaces from the formData
+ updates = {
+  ...updates,
+  first: (updates.first as string).trim(),
+  last: (updates.last as string).trim(),
+  twitter: (updates.twitter as string).trim(),
+  notes: (updates.notes as string).trim(),
+ };
+
  await updateContact(params.contactId, updates);
  return redirect(`/contacts/${params.contactId}`);
 }
@@ -36,14 +46,14 @@ export default function EditContact() {
      aria-label="First name"
      type="text"
      name="first"
-     defaultValue={contact.first}
+     defaultValue={contact.first?.trim()}
     />
     <input
      placeholder="Last"
      aria-label="Last name"
      type="text"
      name="last"
-     defaultValue={contact.last}
+     defaultValue={contact.last?.trim()}
     />
    </p>
    <label htmlFor="twitterEdit">
@@ -53,7 +63,7 @@ export default function EditContact() {
      type="text"
      name="twitter"
      placeholder="@jack"
-     defaultValue={contact.twitter}
+     defaultValue={contact.twitter?.trim()}
     />
    </label>
    <label htmlFor="avatarEdit">
@@ -72,13 +82,15 @@ export default function EditContact() {
     <textarea
      name="notes"
      id="notesEdit"
-     defaultValue={contact.notes}
+     defaultValue={contact.notes?.trim()}
      rows={6}
     />
    </label>
    <p>
     <button type="submit">Save</button>
-    <button type="button">Cancel</button>
+    <Link to={`/contacts/${contact.id}`}>
+     <button type="button">Cancel</button>
+    </Link>
    </p>
   </Form>
  );

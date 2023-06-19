@@ -27,8 +27,8 @@ function App() {
    {/* <ContainerModal3 /> */}
    {/* <ContainerModalPortal /> */}
    {/* <ReactRouterV6Course /> */}
-   {/* <AppReactRouterTutorial /> */}
-   <TeslaLandingPage />
+   <AppReactRouterTutorial />
+   {/* <TeslaLandingPage /> */}
   </div>
  );
 }

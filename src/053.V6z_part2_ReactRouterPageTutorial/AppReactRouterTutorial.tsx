@@ -34,6 +34,10 @@ import EditContact, {
  loader as editLoader,
  action as editAction,
 } from './routes/edit';
+import DeleteContact, {
+ loader as deleteLoader,
+ action as deleteAction,
+} from './routes/delete';
 
 export default function AppReactRouterTutorial() {
  const router = createBrowserRouter([
@@ -52,6 +56,12 @@ export default function AppReactRouterTutorial() {
      element: <EditContact />,
      loader: editLoader,
      action: editAction,
+    },
+    {
+     path: 'contacts/:contactId/destroy',
+     element: <DeleteContact />,
+     loader: deleteLoader,
+     action: deleteAction,
     },
    ],
    // In loader you set the fetch we want to do on rendering, and it will be called on the Component with a useLoaderData

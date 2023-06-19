@@ -6,7 +6,7 @@ import { getContact } from '../tools/contacts';
 export async function loader(param: unknown) {
  // Solving type issue with param
  const { params } = param as { params: { contactId: string } };
- // --//
+ // -- //
  const contact = await getContact(params.contactId);
  return { contact };
 }
@@ -33,7 +33,7 @@ export default function Contact() {
  const { contact } = contactObject as { contact: ContactType };
  return (
   <div id="contact">
-   <div>
+   <div className="mx-2 rounded-3xl shadow-xl">
     <img
      key={contact.avatar}
      src={contact.avatar || undefined}
@@ -72,15 +72,7 @@ export default function Contact() {
      <Form action="edit">
       <button type="submit">Edit</button>
      </Form>
-     <Form
-      method="post"
-      action="destroy"
-      onSubmit={(event) => {
-       if (!window.confirm('Please confirm you want to delete this record.')) {
-        event.preventDefault();
-       }
-      }}
-     >
+     <Form action="destroy">
       <button type="submit">Delete</button>
      </Form>
     </div>

@@ -48,7 +48,10 @@ export default function Root() {
      {(contacts as ContactType[]).length ? (
       <ul>
        {(contacts as ContactType[]).map((contact) => (
-        <li key={contact.id}>
+        <li
+         key={contact.id}
+         className="rounded-lg hover:shadow hover:shadow-black/[0.15] "
+        >
          <NavLink
           className={({ isActive, isPending }) => {
            if (isActive) {
