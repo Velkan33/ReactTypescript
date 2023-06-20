@@ -21,7 +21,26 @@ import {
  ActionFunctionArgs,
  // This is similar to Link except that it have parameters isActive and isPending, that can be used to change the className concurrently.
  NavLink,
+ // It allows to access the object navigation inside a nested element, navigation object example:
+ // {
+ //     "state": "loading",
+ //     "location": {
+ //         "pathname": "/",
+ //         "search": "",
+ //         "hash": "",
+ //         "state": {
+ //             "_isRedirect": true
+ //         },
+ //         "key": "hp8liq2d"
+ //     },
+ //     "formMethod": "post",
+ //     "formAction": "/contacts/ygcjrgl/destroy",
+ //     "formEncType": "application/x-www-form-urlencoded",
+ //     "formData": {}
+ // }
  useNavigation,
+ // Is used to return or advance an amount of pages
+ useNavigate,
 } from 'react-router-dom';
 import './styles/AppStyle.css';
 import Root, {
@@ -38,6 +57,7 @@ import DeleteContact, {
  loader as deleteLoader,
  action as deleteAction,
 } from './routes/delete';
+import Index from './routes';
 
 export default function AppReactRouterTutorial() {
  const router = createBrowserRouter([
@@ -62,6 +82,12 @@ export default function AppReactRouterTutorial() {
      element: <DeleteContact />,
      loader: deleteLoader,
      action: deleteAction,
+     errorElement: <p>Oops! There was an error.</p>,
+    },
+    // index:true tells the router to match and render this component when the user is at the parent route exact path.
+    {
+     index: true,
+     element: <Index />,
     },
    ],
    // In loader you set the fetch we want to do on rendering, and it will be called on the Component with a useLoaderData

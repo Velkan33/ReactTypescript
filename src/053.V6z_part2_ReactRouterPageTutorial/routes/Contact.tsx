@@ -33,7 +33,7 @@ export default function Contact() {
  const { contact } = contactObject as { contact: ContactType };
  return (
   <div id="contact">
-   <div className="mx-2 rounded-3xl shadow-xl">
+   <div className="mx-2">
     <img
      key={contact.avatar}
      src={contact.avatar || undefined}
