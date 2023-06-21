@@ -29,7 +29,7 @@ export async function action() {
 export default function Root() {
  const contactObject = useLoaderData();
  const { contacts, q } = contactObject as { contacts: []; q: string };
- // NOTE This will retrieve severals page status, like iddle loading and location values like pathname, search, hash, key, etc. console.log for more info
+ // ANCHOR This will retrieve severals page status, like iddle loading and location values like pathname, search, hash, key, etc. console.log for more info
  const navigation = useNavigation();
  // LINK This works with new URL to look inside an URL object to see if it has the requested parameter inside it
  const searching =

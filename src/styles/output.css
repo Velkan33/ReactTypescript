@@ -1457,10 +1457,6 @@ video {
   border-radius: 1rem;
 }
 
-.rounded-3xl {
-  border-radius: 1.5rem;
-}
-
 .rounded-full {
   border-radius: 9999px;
 }
@@ -2966,10 +2962,6 @@ video {
 
 .\[\&\>\*\]\:items-center>* {
   align-items: center;
-}
-
-.\[\&\>button\]\:mr-2>button {
-  margin-right: 0.5rem;
 }
 
 .\[\&\>div\]\:grow>div {

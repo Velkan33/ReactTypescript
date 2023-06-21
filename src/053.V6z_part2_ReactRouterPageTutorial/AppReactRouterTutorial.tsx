@@ -15,7 +15,7 @@ import {
  useLoaderData,
  // This seems like a regular form but will have some extra uses like 'action', that will change the URL and like 'method'
  Form,
- // This callback will redirect to a parameter URL (In this app is used as a return on the edit/EditContact component)
+ // This callback will redirect to a parameter URL (In this app is used as a return on the 'edit/EditContact' component)
  redirect,
  // This is the type of the action parameters
  ActionFunctionArgs,
@@ -43,14 +43,20 @@ import {
  useNavigate,
  // Is used to serialize and submit the element pass to it, in this project is used to send a get form for the search bar
  useSubmit,
+ useFetcher,
 } from 'react-router-dom';
+
+// --------------------------------// ANCHOR - More secondary and useful methods inside the 'root' file, the 'contacts' file and the 'Contact' file
 import './styles/AppStyle.css';
 import Root, {
  loader as rootLoader,
  action as rootAction,
 } from './routes/root';
 import ErrorPage from './error-page';
-import Contact, { loader as contactLoader } from './routes/Contact';
+import Contact, {
+ loader as contactLoader,
+ action as contactAction,
+} from './routes/Contact';
 import EditContact, {
  loader as editLoader,
  action as editAction,
@@ -72,6 +78,7 @@ export default function AppReactRouterTutorial() {
      path: 'contacts/:contactId',
      element: <Contact />,
      loader: contactLoader,
+     action: contactAction,
     },
     {
      path: 'contacts/:contactId/edit',
