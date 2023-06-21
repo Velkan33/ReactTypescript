@@ -41,6 +41,8 @@ import {
  useNavigation,
  // Is used to return or advance an amount of pages
  useNavigate,
+ // Is used to serialize and submit the element pass to it, in this project is used to send a get form for the search bar
+ useSubmit,
 } from 'react-router-dom';
 import './styles/AppStyle.css';
 import Root, {

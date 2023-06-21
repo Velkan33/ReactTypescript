@@ -1,7 +1,12 @@
 import React from 'react';
-import { Form, useLoaderData } from 'react-router-dom';
+import {
+ ActionFunctionArgs,
+ Form,
+ useLoaderData,
+ redirect,
+} from 'react-router-dom';
 import { ContactType } from '../tools/types';
-import { getContact } from '../tools/contacts';
+import { getContact, updateContact } from '../tools/contacts';
 
 export async function loader(param: unknown) {
  // Solving type issue with param
