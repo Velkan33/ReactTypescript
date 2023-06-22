@@ -47,7 +47,7 @@ import {
  useFetcher,
 } from 'react-router-dom';
 
-// --------------------------------// ANCHOR - More secondary and useful methods inside the 'root' file, the 'contacts' file and the 'Contact' file
+// --------------------------------// ANCHOR - More secondary and useful methods inside the 'root' file, the 'contacts' file and the 'Contact' file (new URL(), new URLSearchParams().has(), )
 import './styles/AppStyle.css';
 import Root, {
  loader as rootLoader,
