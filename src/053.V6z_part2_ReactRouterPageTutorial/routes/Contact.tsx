@@ -5,6 +5,7 @@ import {
  useLoaderData,
  redirect,
  useFetcher,
+ useNavigation,
 } from 'react-router-dom';
 import { ContactType } from '../tools/types';
 import { getContact, updateContact } from '../tools/contacts';
@@ -14,6 +15,10 @@ export async function loader(param: unknown) {
  const { params } = param as { params: { contactId: string } };
  // -- //
  const contact = await getContact(params.contactId);
+ // TODO - Handle this error extending the Error class
+ if (!contact) {
+  throw new Error('Not Found');
+ }
  return { contact };
 }
 
@@ -29,12 +34,16 @@ export async function action({ request, params }: ActionFunctionArgs) {
 function Favorite({ contact }: { contact: ContactType }) {
  const fetcher = useFetcher();
  // yes, this is a `let` for later
- const { favorite } = contact;
+ let { favorite } = contact;
+ if (fetcher.formData) {
+  favorite = fetcher.formData.get('favorite') === 'true';
+ }
  return (
   <fetcher.Form method="post">
    <button
     type="submit"
     name="favorite"
+    className="seaching"
     value={favorite ? 'false' : 'true'}
     aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
    >
