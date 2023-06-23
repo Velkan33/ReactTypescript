@@ -4,12 +4,12 @@ import {
  redirect,
  ActionFunctionArgs,
  Link,
+ useNavigate,
 } from 'react-router-dom';
 import { ContactType } from '../tools/types';
 import { getContact, updateContact } from '../tools/contacts';
 /// This will execute when the form is loaded
 export async function loader(param: unknown) {
- console.log('formulario cargado');
  const { params } = param as { params: { contactId: string } };
  const contact = await getContact(params.contactId);
 
@@ -36,6 +36,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 export default function EditContact() {
  const contactObject = useLoaderData();
  const { contact } = contactObject as { contact: ContactType };
+ const navigate = useNavigate();
 
  return (
   <Form method="post" id="contact-form">
@@ -88,9 +89,9 @@ export default function EditContact() {
    </label>
    <p>
     <button type="submit">Save</button>
-    <Link to={`/contacts/${contact.id}`}>
-     <button type="button">Cancel</button>
-    </Link>
+    <button type="button" onClick={() => navigate(-1)}>
+     Cancel
+    </button>
    </p>
   </Form>
  );

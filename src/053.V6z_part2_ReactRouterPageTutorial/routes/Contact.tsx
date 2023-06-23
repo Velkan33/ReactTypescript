@@ -1,31 +1,55 @@
 import React from 'react';
-import { Form, useLoaderData } from 'react-router-dom';
+import {
+ ActionFunctionArgs,
+ Form,
+ useLoaderData,
+ redirect,
+ useFetcher,
+ useNavigation,
+} from 'react-router-dom';
 import { ContactType } from '../tools/types';
-import { getContact } from '../tools/contacts';
+import { getContact, updateContact } from '../tools/contacts';
 
 export async function loader(param: unknown) {
  // Solving type issue with param
  const { params } = param as { params: { contactId: string } };
  // -- //
  const contact = await getContact(params.contactId);
+ // TODO - Handle this error extending the Error class
+ if (!contact) {
+  throw new Error('Not Found');
+ }
  return { contact };
 }
 
+// ANCHOR - This 'action' function is what will call the Form inside the Component.
+// As we see the 'request' is the data the Form send. And the 'params' is the object where the /:data/ is
+export async function action({ request, params }: ActionFunctionArgs) {
+ const formData = await request.formData();
+ return updateContact(params.contactId, {
+  favorite: formData.get('favorite') === 'true',
+ });
+}
+
 function Favorite({ contact }: { contact: ContactType }) {
+ const fetcher = useFetcher();
  // yes, this is a `let` for later
- let favorite = false;
- favorite = contact.favorite || false;
+ let { favorite } = contact;
+ if (fetcher.formData) {
+  favorite = fetcher.formData.get('favorite') === 'true';
+ }
  return (
-  <Form method="post">
+  <fetcher.Form method="post">
    <button
-    type="button"
+    type="submit"
     name="favorite"
+    className="seaching"
     value={favorite ? 'false' : 'true'}
     aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
    >
     {favorite ? '★' : '☆'}
    </button>
-  </Form>
+  </fetcher.Form>
  );
 }
 export default function Contact() {
@@ -33,7 +57,7 @@ export default function Contact() {
  const { contact } = contactObject as { contact: ContactType };
  return (
   <div id="contact">
-   <div className="mx-2 rounded-3xl shadow-xl">
+   <div className="mx-2">
     <img
      key={contact.avatar}
      src={contact.avatar || undefined}

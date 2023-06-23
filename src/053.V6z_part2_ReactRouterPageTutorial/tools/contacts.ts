@@ -64,16 +64,18 @@ export async function getContact(id?: unknown) {
  return contact ?? null;
 }
 
-// ANCHOR The types here are temporal
+// ANCHOR Here we find an element inside the 'contacts' object inside the 'localforage'. We change it and then we update the older 'contacts' object with the new one.
 export async function updateContact(id?: string, updates?: unknown) {
  await fakeNetwork();
  const contacts = await localforage.getItem('contacts');
+ console.log(contacts);
  const contact = (contacts as ContactType[]).find(
   (c: { id: string }) => c.id === id
  );
  if (!contact) throw new Error(`No contact found for ${id}`);
  Object.assign(contact, updates);
  await set(contacts);
+
  return contact;
 }
 
