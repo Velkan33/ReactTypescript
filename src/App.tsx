@@ -8,8 +8,9 @@ import React from 'react';
 // import ContactForm2 from './046_Validacion_Formulario_Programacion_de_Eventos_2_de_4 /ContactForm';
 
 import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
-import AppReactRouterTutorial from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
+import AppReactRouterTutorial2 from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
 import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
+import CrudApi from './064_ReactRouterEjercicios/CrudApp';
 
 function App() {
  // const SongFinderStyle1 =
@@ -27,8 +28,9 @@ function App() {
    {/* <ContainerModal3 /> */}
    {/* <ContainerModalPortal /> */}
    {/* <ReactRouterV6Course /> */}
-   <AppReactRouterTutorial />
+   {/* <AppReactRouterTutorial2 /> */}
    {/* <TeslaLandingPage /> */}
+   <CrudApi />
   </div>
  );
 }

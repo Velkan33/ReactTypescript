@@ -45,6 +45,12 @@ import {
  useSubmit,
  // Is to send a form without changing the url, is used in the 'Contact' component.
  useFetcher,
+ // This is used to create the root structure with Elements <Element/> structure
+ createRoutesFromElements,
+ // This is used to create the object in an element structure
+ Route,
+ BrowserRouter,
+ Routes,
 } from 'react-router-dom';
 
 // --------------------------------// ANCHOR - More secondary and useful methods inside the 'root' file, the 'contacts' file and the 'Contact' file (new URL(), new URLSearchParams().has(), )
@@ -68,36 +74,42 @@ import DeleteContact, {
 } from './routes/delete';
 import Index from './routes';
 
-export default function AppReactRouterTutorial() {
+export function AppReactRouterTutorial() {
  const router = createBrowserRouter([
   {
    path: '/',
    element: <Root />,
    errorElement: <ErrorPage />,
    children: [
+    // NOTE - We create a pathless route that wrap the rest of elements to make the error page participate in the UI, this is the same as writing the error page for every children.
     {
-     path: 'contacts/:contactId',
-     element: <Contact />,
-     loader: contactLoader,
-     action: contactAction,
-    },
-    {
-     path: 'contacts/:contactId/edit',
-     element: <EditContact />,
-     loader: editLoader,
-     action: editAction,
-    },
-    {
-     path: 'contacts/:contactId/destroy',
-     element: <DeleteContact />,
-     loader: deleteLoader,
-     action: deleteAction,
-     errorElement: <p>Oops! There was an error.</p>,
-    },
-    // index:true tells the router to match and render this component when the user is at the parent route exact path.
-    {
-     index: true,
-     element: <Index />,
+     errorElement: <ErrorPage />,
+     children: [
+      {
+       path: 'contacts/:contactId',
+       element: <Contact />,
+       loader: contactLoader,
+       action: contactAction,
+      },
+      {
+       path: 'contacts/:contactId/edit',
+       element: <EditContact />,
+       loader: editLoader,
+       action: editAction,
+      },
+      {
+       path: 'contacts/:contactId/destroy',
+       element: <DeleteContact />,
+       loader: deleteLoader,
+       action: deleteAction,
+       errorElement: <p>Oops! There was an error.</p>,
+      },
+      // index:true tells the router to match and render this component when the user is at the parent route exact path.
+      {
+       index: true,
+       element: <Index />,
+      },
+     ],
     },
    ],
    // In loader you set the fetch we want to do on rendering, and it will be called on the Component with a useLoaderData
@@ -108,3 +120,82 @@ export default function AppReactRouterTutorial() {
  ]);
  return <RouterProvider router={router} />;
 }
+
+// IMPORTANT - We could create all the dynamic before, with a more stylistic way.
+
+export default function AppReactRouterTutorial2() {
+ const router = createBrowserRouter(
+  createRoutesFromElements(
+   <Route
+    path="/"
+    element={<Root />}
+    loader={rootLoader}
+    action={rootAction}
+    errorElement={<ErrorPage />}
+   >
+    <Route errorElement={<ErrorPage />}>
+     <Route
+      path="contacts/:contactId"
+      element={<Contact />}
+      loader={contactLoader}
+      action={contactAction}
+     />
+     <Route
+      path="contacts/:contactId/edit"
+      element={<EditContact />}
+      loader={editLoader}
+      action={editAction}
+     />
+     <Route
+      path="contacts/:contactId/destroy"
+      element={<DeleteContact />}
+      loader={deleteLoader}
+      action={deleteAction}
+      errorElement={<p>Oops! There was an error.</p>}
+     />
+     <Route index element={<Index />} />
+    </Route>
+   </Route>
+  )
+ );
+ return <RouterProvider router={router} />;
+}
+// We could also reduce this just wraping the Route Component into a Routes component and this one inside a BrowserRouter and returning this one.
+// export default function AppReactRouterTutorial3() {
+//  return (
+//   <BrowserRouter>
+//    <Routes>
+//     <Route
+//      path="/"
+//      element={<Root />}
+//      loader={rootLoader}
+//      action={rootAction}
+//      errorElement={<ErrorPage />}
+//     >
+//      <Route errorElement={<ErrorPage />}>
+//       <Route
+//        path="contacts/:contactId"
+//        element={<Contact />}
+//        loader={contactLoader}
+//        action={contactAction}
+//       />
+//       <Route
+//        path="contacts/:contactId/edit"
+//        element={<EditContact />}
+//        loader={editLoader}
+//        action={editAction}
+//       />
+//       <Route
+//        path="contacts/:contactId/destroy"
+//        element={<DeleteContact />}
+//        loader={deleteLoader}
+//        action={deleteAction}
+//        errorElement={<p>Oops! There was an error.</p>}
+//       />
+//       <Route index element={<Index />} />
+//      </Route>
+//     </Route>
+//    </Routes>
+//   </BrowserRouter>
+//  );
+// }
