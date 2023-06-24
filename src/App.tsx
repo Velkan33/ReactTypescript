@@ -11,12 +11,13 @@ import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
 import AppReactRouterTutorial2 from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
 import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
 import CrudApi from './064_ReactRouterEjercicios/CrudApp';
+import SongFinderApp from './064_ReactRouterEjercicios/SongFinderApp';
 
 function App() {
  // const SongFinderStyle1 =
  //  'min-h-screen w-full bg-gradient-to-l from-blue-400 to-violet-400 text-black font-bold';
  // const SongFinderStyle = 'w-full  text-black font-bold';
- const SongFinderStyle = 'w-full h-full flex';
+ const SongFinderStyle = 'w-full h-full';
  return (
   <div className={SongFinderStyle}>
    {/* <CrudApi5A /> */}
@@ -31,6 +32,7 @@ function App() {
    {/* <AppReactRouterTutorial2 /> */}
    {/* <TeslaLandingPage /> */}
    <CrudApi />
+   <SongFinderApp />
   </div>
  );
 }
