@@ -12,6 +12,7 @@ import AppReactRouterTutorial2 from './053.V6z_part2_ReactRouterPageTutorial/App
 import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
 import CrudApi from './064_ReactRouterEjercicios/CrudApp';
 import SongFinderApp from './064_ReactRouterEjercicios/SongFinderApp';
+import BaseApp from './064_ReactRouterEjercicios/BaseApp';
 
 function App() {
  // const SongFinderStyle1 =
@@ -31,8 +32,9 @@ function App() {
    {/* <ReactRouterV6Course /> */}
    {/* <AppReactRouterTutorial2 /> */}
    {/* <TeslaLandingPage /> */}
-   <CrudApi />
-   <SongFinderApp />
+   {/* <CrudApi /> */}
+   {/* <SongFinderApp /> */}
+   <BaseApp />
   </div>
  );
 }
