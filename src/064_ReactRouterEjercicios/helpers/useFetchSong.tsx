@@ -62,7 +62,7 @@ export default function useFetchSong(
     setSongResults(response.hits);
     if (dispatch !== null) dispatch({ type: 'REMOVE_LOADING' });
    })
-   .catch((err) => console.error(err));
+   .catch((err) => window.console.error(err));
  }
  return { handleSubmit, setPage, page };
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LyricsComponent from './LyricsComponent';
-import Loader from './Components/Loader';
+import Loader from '../Loader';
 
 interface State {
  title: string;
@@ -46,7 +46,7 @@ export default function SongResultElement({ data }: { data: State }) {
      setLyrics(response.lyrics.lyrics.body.html);
      setLoading(false);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => window.console.error(err));
   }
  };
 

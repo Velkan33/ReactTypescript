@@ -61,7 +61,7 @@ function myReducer(draft: LastState, action: Action) {
    }
    break;
   default: {
-   console.log('default reducer');
+   window.console.log('default reducer');
   }
  }
 }

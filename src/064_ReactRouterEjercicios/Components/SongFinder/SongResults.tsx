@@ -2,7 +2,7 @@ import React from 'react';
 import { useMySongContext, useMySongDispatch } from './SongContextReducer';
 import SongResultElement from './SongResultElement';
 import ButtonsBackForward from './SongButtonsBackForward';
-import Loader from './Components/Loader';
+import Loader from '../Loader';
 
 interface State {
  title: string;

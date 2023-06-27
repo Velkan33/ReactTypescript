@@ -1,5 +1,5 @@
 import React from 'react';
-import useFetchSong from './useFetchSong';
+import useFetchSong from '../../helpers/useFetchSong';
 
 interface Action {
  type: string;

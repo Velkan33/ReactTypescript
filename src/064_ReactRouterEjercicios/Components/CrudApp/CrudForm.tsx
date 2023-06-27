@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { WritableDraft } from 'immer/dist/internal';
+import React from 'react';
 
 const initialForm = {
  nombre: '',
@@ -15,14 +14,12 @@ interface DataType {
 export default function CrudForm({
  createData,
  updateData,
- dataToEdit,
  updateDataToEdit,
  form,
  updateForm,
 }: {
  createData: CallableFunction;
  updateData: CallableFunction;
- dataToEdit: DataType | null;
  updateDataToEdit: CallableFunction;
  form: DataType;
  updateForm: CallableFunction;
@@ -51,7 +48,8 @@ export default function CrudForm({
  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   if (!form.nombre || !form.constelacion) {
-   alert('Datos Incompletos');
+   // eslint-disable-next-line no-alert
+   window.alert('Datos Incompletos');
    return;
   }
 
