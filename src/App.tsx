@@ -10,7 +10,7 @@ import React from 'react';
 import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
 import AppReactRouterTutorial2 from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
 import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
-import CrudApi from './064_ReactRouterEjercicios/Components/CrudApp/CrudApp';
+import CrudApi from './064_ReactRouterEjercicios/components/CrudApp/CrudApp';
 import SongFinderApp from './064_ReactRouterEjercicios/SongFinderApp';
 import BaseRouter from './064_ReactRouterEjercicios/router/BaseRouter';
 
