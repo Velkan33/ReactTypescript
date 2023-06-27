@@ -5,8 +5,8 @@ import {
  createBrowserRouter,
  createRoutesFromElements,
 } from 'react-router-dom';
-import SongFinderApp from '../components/SongFinder/SongFinderApp';
-import CrudApi from '../components/CrudApp/CrudApp';
+import SongFinderApp from '../Components/SongFinder/SongFinderApp';
+import CrudApi from '../Components/CrudApp/CrudApp';
 import MenuRouter from './MenuRouter';
 
 export default function BaseRouter() {
