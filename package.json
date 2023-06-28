@@ -13,6 +13,7 @@
   "caniuse-lite": "^1.0.30001494",
   "immer": "^9.0.19",
   "jshint": "^2.13.6",
+  "json-server": "^0.17.3",
   "localforage": "^1.10.0",
   "lodash": "^4.17.21",
   "match-sorter": "^6.3.1",

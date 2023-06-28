@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { WritableDraft } from 'immer/dist/internal';
-import helpHttp from './helpers/helperHttp';
+import helpHttp from '../../helpers/helperHttp';
 
 const initialForm = {
  nombre: '',

@@ -3,7 +3,7 @@ import { useImmer } from 'use-immer';
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
 import initialDb from './initialDb';
-import helpHttp from './helpers/helperHttp';
+import helpHttp from '../../../034_Inicializar_estado_con_AJAX_(3/helpers/helperHttp';
 
 interface DataType {
  nombre: string;
@@ -16,7 +16,7 @@ const myUrl = 'http://localhost:6655/santos';
 /** En esta clase 34 Jon crea un use effect para actualizar la base de datos */
 
 export default function CrudApi3() {
- const [db, updateDb] = useImmer([]);
+ const [db, updateDb] = useImmer<DataType[]>([]);
  const [dataToEdit, updateDataToEdit] = useImmer<null | DataType>(null);
  const [form, updateForm] = useImmer<{
   nombre: string;
