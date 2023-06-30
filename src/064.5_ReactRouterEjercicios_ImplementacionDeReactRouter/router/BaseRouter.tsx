@@ -9,6 +9,7 @@ import SongFinderApp from '../Components/SongFinder/SongFinderApp';
 
 import MenuRouter from './MenuRouter';
 import CrudApi3 from '../Components/CrudApp/CrudApp';
+import Message from '../Components/ErrorMessage';
 
 export default function BaseRouter() {
  const router = createBrowserRouter(
@@ -17,7 +18,11 @@ export default function BaseRouter() {
     <Route path="/" element={<MenuRouter />} />
 
     <Route path="songFinder" element={<SongFinderApp />} />
-    <Route path="crud" element={<CrudApi3 />} />
+    <Route
+     path="crud"
+     element={<CrudApi3 />}
+     errorElement={<Message msg="Site unreacheable error" />}
+    />
    </>
   )
  );
