@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useImmer } from 'use-immer';
-import { useNavigate } from 'react-router-dom';
+import { HashRouter, useNavigate } from 'react-router-dom';
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
 import initialDb from './initialDb';

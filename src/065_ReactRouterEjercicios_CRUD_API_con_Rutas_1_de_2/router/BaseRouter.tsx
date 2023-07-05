@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+ NavLink,
  Route,
  RouterProvider,
  createBrowserRouter,
@@ -22,7 +23,29 @@ export default function BaseRouter() {
      path="crud"
      element={<CrudApi3 />}
      errorElement={<Message msg="Site unreacheable error" />}
-    />
+    >
+     <Route path="ro" element={<p>hos</p>} />
+     {/* <Route
+      index
+      element={
+       <>
+        <p>Hola mundo</p>
+        <NavLink
+         to="/crud/santos"
+         className={(isActive) => (isActive ? 'active' : '')}
+        >
+         Santoseu
+        </NavLink>
+        <NavLink
+         to="/crud/add"
+         className={(isActive) => (isActive ? 'active' : '')}
+        >
+         Add
+        </NavLink>
+       </>
+      }
+     /> */}
+    </Route>
    </>
   )
  );
