@@ -72,7 +72,7 @@ export default function CrudForm({
  return (
   <div>
    <h3 className="text-3xl">{form.id ? 'Editar' : 'Agregar'}</h3>
-   <Form action="/crud" method="post" onSubmit={(e) => handleSubmit(e)}>
+   <Form action="/crud" onSubmit={(e) => handleSubmit(e)}>
     <input
      className="block my-4 border text-black px-1 py-1 rounded-md"
      type="text"
