@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../Styles/styles';
 
 export default function MenuRouter() {
- const buttonStyle =
-  'rounded-lg hover:bg-gray-100 shadow m-2 px-3 py-2 text-gray-600';
+ const buttonStyle = styles.button;
  return (
   <div>
    <Link to="/crud" className={buttonStyle}>

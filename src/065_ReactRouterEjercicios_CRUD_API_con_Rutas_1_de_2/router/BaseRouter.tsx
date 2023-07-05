@@ -5,14 +5,34 @@ import {
  RouterProvider,
  createBrowserRouter,
  createRoutesFromElements,
+ redirect,
 } from 'react-router-dom';
+import { useImmer } from 'use-immer';
 import SongFinderApp from '../Components/SongFinder/SongFinderApp';
 
 import MenuRouter from './MenuRouter';
-import CrudApi3 from '../Components/CrudApp/CrudApp';
 import Message from '../Components/ErrorMessage';
+import CrudAppIndex from '../Components/CrudApp/CrudAppIndex';
+import CrudAppTable from '../Components/CrudApp/CrudAppTable';
+import CrudAppCreate from '../Components/CrudApp/CrudAppCreate';
+// import { action as createAction } from '../Components/CrudApp/CrudForm';
 
+interface DataType {
+ nombre: string;
+ constelacion: string;
+ id: number;
+}
 export default function BaseRouter() {
+ const [dataToEdit, updateDataToEdit] = useImmer<null | DataType>(null);
+ const [form, updateForm] = useImmer<{
+  nombre: string;
+  constelacion: string;
+  id: null | number;
+ }>({
+  nombre: '',
+  constelacion: '',
+  id: null,
+ });
  const router = createBrowserRouter(
   createRoutesFromElements(
    <>
@@ -21,33 +41,32 @@ export default function BaseRouter() {
     <Route path="songFinder" element={<SongFinderApp />} />
     <Route
      path="crud"
-     element={<CrudApi3 />}
+     element={<CrudAppIndex />}
      errorElement={<Message msg="Site unreacheable error" />}
     >
      <Route
-      path="ro"
-      element={<p className="text-black absolute">Hola mundo como va</p>}
-     />
-     {/* <Route
-      index
+      path=""
       element={
-       <>
-        <p>Hola mundo</p>
-        <NavLink
-         to="/crud/santos"
-         className={(isActive) => (isActive ? 'active' : '')}
-        >
-         Santoseu
-        </NavLink>
-        <NavLink
-         to="/crud/add"
-         className={(isActive) => (isActive ? 'active' : '')}
-        >
-         Add
-        </NavLink>
-       </>
+       <CrudAppTable
+        dataToEdit={dataToEdit}
+        updateDataToEdit={updateDataToEdit}
+        form={form}
+        updateForm={updateForm}
+       />
       }
-     /> */}
+     />
+     <Route
+      path="add"
+      element={
+       <CrudAppCreate
+        dataToEdit={dataToEdit}
+        updateDataToEdit={updateDataToEdit}
+        form={form}
+        updateForm={updateForm}
+       />
+      }
+      // action={createAction}
+     />
     </Route>
    </>
   )

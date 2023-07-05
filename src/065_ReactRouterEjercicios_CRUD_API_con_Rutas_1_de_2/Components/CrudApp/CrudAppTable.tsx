@@ -16,18 +16,23 @@ const myUrl = 'http://localhost:6655/santos';
 
 /** En esta clase 34 Jon crea un use effect para actualizar la base de datos */
 
-export default function CrudApi3() {
- const [db, updateDb] = useImmer<DataType[]>([]);
- const [dataToEdit, updateDataToEdit] = useImmer<null | DataType>(null);
- const [form, updateForm] = useImmer<{
+export default function CrudAppTable({
+ dataToEdit,
+ updateDataToEdit,
+ form,
+ updateForm,
+}: {
+ dataToEdit: DataType | null;
+ updateDataToEdit: CallableFunction;
+ form: {
   nombre: string;
   constelacion: string;
   id: null | number;
- }>({
-  nombre: '',
-  constelacion: '',
-  id: null,
- });
+ };
+ updateForm: CallableFunction;
+}) {
+ const [db, updateDb] = useImmer<DataType[]>([]);
+
  const navigate = useNavigate();
 
  useEffect(() => {
@@ -90,24 +95,14 @@ export default function CrudApi3() {
  };
  return (
   <div className="grid md:grid-cols-2 items-start max-w-[800px] place-items-center mt-8 mx-auto">
-   <section>
-    <button
-     type="button"
-     onClick={() => navigate(-1)}
-     className=" border fixed top-3 left-3 rounded-full h-8 w-8 bg-gray-300/50 hover:bg-gray-400/50 "
-    >
-     <span className="text-xl">&#x2190;</span>
-    </button>
-    <h2 className="text-4xl">CRUD App</h2>
-    <CrudForm
-     createData={createData}
-     updateData={updateData}
-     dataToEdit={dataToEdit}
-     updateDataToEdit={updateDataToEdit}
-     form={form}
-     updateForm={updateForm}
-    />
-   </section>
+   <button
+    type="button"
+    onClick={() => navigate(-1)}
+    className=" border fixed top-3 left-3 rounded-full h-8 w-8 bg-gray-300/50 hover:bg-gray-400/50 "
+   >
+    <span className="text-xl">&#x2190;</span>
+   </button>
+
    <section className="md:mt-0 mt-6">
     <CrudTable
      data={db}
