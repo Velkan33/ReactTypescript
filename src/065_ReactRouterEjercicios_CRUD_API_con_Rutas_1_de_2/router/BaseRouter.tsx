@@ -24,7 +24,10 @@ export default function BaseRouter() {
      element={<CrudApi3 />}
      errorElement={<Message msg="Site unreacheable error" />}
     >
-     <Route path="ro" element={<p>hos</p>} />
+     <Route
+      path="ro"
+      element={<p className="text-black absolute">Hola mundo como va</p>}
+     />
      {/* <Route
       index
       element={
