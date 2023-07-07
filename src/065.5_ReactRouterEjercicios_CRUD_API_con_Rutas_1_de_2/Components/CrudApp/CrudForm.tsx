@@ -1,5 +1,6 @@
-import React from 'react';
-// import { WritableDraft } from 'immer/dist/internal';
+import React, { useEffect } from 'react';
+import { WritableDraft } from 'immer/dist/internal';
+import { Form, redirect } from 'react-router-dom';
 import helpHttp from '../../helpers/helperHttp';
 
 const initialForm = {
@@ -12,7 +13,9 @@ interface DataType {
  constelacion: string;
  id: number | null;
 }
-
+// export async function action() {
+//  console.log('hola');
+// }
 export default function CrudForm({
  createData,
  updateData,
@@ -50,12 +53,10 @@ export default function CrudForm({
 
  // ANCHOR - HANDLE_SUBMIT
  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
   if (!form.nombre || !form.constelacion) {
    alert('Datos Incompletos');
    return;
   }
-
   if (typeof form.id === 'number') {
    updateData({
     nombre: form.nombre,
@@ -71,7 +72,7 @@ export default function CrudForm({
  return (
   <div>
    <h3 className="text-3xl">{form.id ? 'Editar' : 'Agregar'}</h3>
-   <form onSubmit={handleSubmit}>
+   <Form action="/crud" onSubmit={(e) => handleSubmit(e)}>
     <input
      className="block my-4 border text-black px-1 py-1 rounded-md"
      type="text"
@@ -99,7 +100,7 @@ export default function CrudForm({
      value="Limpiar"
      onClick={handleReset}
     />
-   </form>
+   </Form>
   </div>
  );
 }

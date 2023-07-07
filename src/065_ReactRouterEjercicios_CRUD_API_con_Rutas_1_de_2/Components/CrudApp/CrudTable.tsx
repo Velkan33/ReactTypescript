@@ -1,6 +1,5 @@
 import React from 'react';
 // import { Classes } from '../assets/Classes';
-import { ActionFunctionArgs, Form, redirect } from 'react-router-dom';
 import CrudTableTbody from './CrudTableTbody';
 
 interface DataType {
@@ -22,35 +21,33 @@ export default function CrudTable({
 }) {
  // console.log(data);
  return (
-  <Form action="/crud/add">
-   <table>
-    <thead>
+  <table>
+   <thead>
+    <tr>
+     <th className=" px-2 my-2">Nombre</th>
+     <th className=" px-2 my-2">Constelacion</th>
+     <th className=" px-2 my-2">Acciones</th>
+    </tr>
+   </thead>
+   {data.length === 0 ? (
+    <tbody>
      <tr>
-      <th className=" px-2 my-2">Nombre</th>
-      <th className=" px-2 my-2">Constelacion</th>
-      <th className=" px-2 my-2">Acciones</th>
+      <td>Sin Datos</td>
      </tr>
-    </thead>
-    {data.length === 0 ? (
-     <tbody>
-      <tr>
-       <td>Sin Datos</td>
-      </tr>
-     </tbody>
-    ) : (
-     data.map((el) => (
-      <CrudTableTbody
-       key={el.id}
-       nombre={el.nombre}
-       constelacion={el.constelacion}
-       id={el.id}
-       deleteData={deleteData}
-       updateDataToEdit={updateDataToEdit}
-       updateForm={updateForm}
-      />
-     ))
-    )}
-   </table>
-  </Form>
+    </tbody>
+   ) : (
+    data.map((el) => (
+     <CrudTableTbody
+      key={el.id}
+      nombre={el.nombre}
+      constelacion={el.constelacion}
+      id={el.id}
+      deleteData={deleteData}
+      updateDataToEdit={updateDataToEdit}
+      updateForm={updateForm}
+     />
+    ))
+   )}
+  </table>
  );
 }

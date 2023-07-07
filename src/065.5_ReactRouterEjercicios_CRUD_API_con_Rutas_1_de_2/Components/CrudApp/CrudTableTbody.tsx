@@ -21,7 +21,6 @@ export default function CrudTableTbody({
 }: NewDataType) {
  // TODO - Cambiar el data to edit que modificara una elemento del database
  const handleDataToEdit = () => {
-  // console.log({ nombre, constelacion, id });
   updateDataToEdit({ nombre, constelacion, id });
   updateForm({ nombre, constelacion, id });
  };
@@ -35,7 +34,7 @@ export default function CrudTableTbody({
      <button
       onClick={handleDataToEdit}
       className="hover:bg-gray-400 transition border px-2 py-1 my-1 mx-1 bg-gray-300 font-bold rounded-sm"
-      type="button"
+      type="submit"
      >
       Editar
      </button>
