@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 import { useImmer } from 'use-immer';
+import {
+ Route,
+ RouterProvider,
+ createBrowserRouter,
+ createRoutesFromElements,
+} from 'react-router-dom';
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
 // import initialDb from './initialDb';
@@ -85,27 +91,47 @@ export default function CrudAppIndex() {
    updateDataToEdit(null);
   }
  };
- return (
-  <div className="grid md:grid-cols-2 items-start max-w-[800px] place-items-center mt-8 mx-auto">
-   <section>
-    <h2 className="text-4xl">CRUD App</h2>
-    <CrudForm
-     createData={createData}
-     updateData={updateData}
-     dataToEdit={dataToEdit}
-     updateDataToEdit={updateDataToEdit}
-     form={form}
-     updateForm={updateForm}
+
+ // SECTION - Router
+ const router = createBrowserRouter(
+  createRoutesFromElements(
+   <>
+    <Route
+     path="/"
+     element={
+      <CrudForm
+       createData={createData}
+       updateData={updateData}
+       dataToEdit={dataToEdit}
+       updateDataToEdit={updateDataToEdit}
+       form={form}
+       updateForm={updateForm}
+      />
+     }
     />
-   </section>
-   <section className="md:mt-0 mt-6">
-    <CrudTable
-     data={db}
-     updateDataToEdit={updateDataToEdit}
-     deleteData={deleteData}
-     updateForm={updateForm}
+    <Route
+     path="/table"
+     element={
+      <CrudTable
+       data={db}
+       updateDataToEdit={updateDataToEdit}
+       deleteData={deleteData}
+       updateForm={updateForm}
+      />
+     }
     />
-   </section>
-  </div>
+   </>
+  )
  );
+ return <RouterProvider router={router} />;
 }
+// (
+//   <div className="grid md:grid-cols-2 items-start max-w-[800px] place-items-center mt-8 mx-auto">
+//    <section>
+//     <h2 className="text-4xl">CRUD App</h2>
+//    </section>
+//    <section className="md:mt-0 mt-6">
+
+//    </section>
+//   </div>
+//  );
