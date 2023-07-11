@@ -11,6 +11,8 @@ import ReactRouterV6Course from './053.V6_ReactRouterV6/ReactRouterV6Course';
 import AppReactRouterTutorial2 from './053.V6z_part2_ReactRouterPageTutorial/AppReactRouterTutorial';
 import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPage';
 import BaseRouter from './065_ReactRouterEjercicios_CRUD_API_con_Rutas_1_de_2/router/BaseRouter';
+import CrudAppIndex from './065_ReactRouterEjercicios_CRUD_API_con_Rutas_1_de_2/Components/CrudApp/CrudAppIndex';
+import CrudAppIndex2 from './066_ReactRouterEjercicios_CRUD_API_con_Rutas_2_de_2/Components/CrudApp/CrudAppIndex';
 
 function App() {
  // const SongFinderStyle1 =
@@ -32,7 +34,8 @@ function App() {
    {/* <TeslaLandingPage /> */}
    {/* <CrudApi /> */}
    {/* <SongFinderApp /> */}
-   <BaseRouter />
+   {/* <BaseRouter /> */}
+   <CrudAppIndex2 />
   </div>
  );
 }

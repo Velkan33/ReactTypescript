@@ -11,12 +11,12 @@ interface DataType {
 export default function CrudTable({
  data,
  deleteData,
- updateDataToEdit,
+ // updateDataToEdit,
  updateForm,
 }: {
  data: DataType[] | [];
  deleteData: CallableFunction;
- updateDataToEdit: CallableFunction;
+ // updateDataToEdit: CallableFunction;
  updateForm: CallableFunction;
 }) {
  // console.log(data);
@@ -45,7 +45,7 @@ export default function CrudTable({
        constelacion={el.constelacion}
        id={el.id}
        deleteData={deleteData}
-       updateDataToEdit={updateDataToEdit}
+       // updateDataToEdit={updateDataToEdit}
        updateForm={updateForm}
       />
      ))

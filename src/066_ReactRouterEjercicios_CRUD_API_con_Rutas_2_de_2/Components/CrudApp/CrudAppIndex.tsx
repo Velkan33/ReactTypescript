@@ -21,11 +21,11 @@ interface DataType {
 const { get, del, put, post } = helpHttp();
 const myUrl = 'http://localhost:6655/santos';
 
-/** En esta clase 65 se crea la carcaza de lo que sera el Router, en la siguiente conectara cada ruta con su respectiva salida */
+/** En esta clase 66 vimos como enlazar cada parte del Router */
 
-export default function CrudAppIndex() {
+export default function CrudAppIndex2() {
  const [db, updateDb] = useImmer<DataType[]>([]);
- const [dataToEdit, updateDataToEdit] = useImmer<null | DataType>(null);
+ // const [dataToEdit, updateDataToEdit] = useImmer<null | DataType>(null);
  const [form, updateForm] = useImmer<{
   nombre: string;
   constelacion: string;
@@ -88,10 +88,10 @@ export default function CrudAppIndex() {
    del(`${myUrl}/${id}`);
   }
 
-  if (dataToEdit !== null && id === dataToEdit.id) {
-   updateForm({ nombre: '', constelacion: '', id: null });
-   updateDataToEdit(null);
-  }
+  // if (dataToEdit !== null && id === dataToEdit.id) {
+  //  updateDataToEdit(null);
+  // }
+  updateForm({ nombre: '', constelacion: '', id: null });
  };
 
  // SECTION - Router
@@ -101,8 +101,12 @@ export default function CrudAppIndex() {
     path="/"
     element={
      <>
-      <NavLink to="/">Tabla</NavLink>
-      <NavLink to="/add">Add</NavLink>
+      <NavLink to="/" className="p-2 m-1` border rounded-lg">
+       Tabla
+      </NavLink>
+      <NavLink to="/add" className="p-2 m-1 border rounded-lg">
+       Add
+      </NavLink>
       <Outlet />
      </>
     }
@@ -112,21 +116,33 @@ export default function CrudAppIndex() {
      element={
       <CrudTable
        data={db}
-       updateDataToEdit={updateDataToEdit}
+       // updateDataToEdit={updateDataToEdit}
        deleteData={deleteData}
        updateForm={updateForm}
       />
      }
     />
-    <Route path="/edit/:id" element={<div />} />
+    <Route
+     path="/edit/:id"
+     element={
+      <CrudForm
+       createData={createData}
+       updateData={updateData}
+       // dataToEdit={dataToEdit}
+       // updateDataToEdit={updateDataToEdit}
+       form={form}
+       updateForm={updateForm}
+      />
+     }
+    />
     <Route
      path="/add"
      element={
       <CrudForm
        createData={createData}
        updateData={updateData}
-       dataToEdit={dataToEdit}
-       updateDataToEdit={updateDataToEdit}
+       // dataToEdit={dataToEdit}
+       // updateDataToEdit={updateDataToEdit}
        form={form}
        updateForm={updateForm}
       />
