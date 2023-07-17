@@ -13,6 +13,7 @@ import TeslaLandingPage from './999_Diario_React/TeslaLandingPage/TeslaLandingPa
 import BaseRouter from './065_ReactRouterEjercicios_CRUD_API_con_Rutas_1_de_2/router/BaseRouter';
 import CrudAppIndex from './065_ReactRouterEjercicios_CRUD_API_con_Rutas_1_de_2/Components/CrudApp/CrudAppIndex';
 import CrudAppIndex2 from './066_ReactRouterEjercicios_CRUD_API_con_Rutas_2_de_2/Components/CrudApp/CrudAppIndex';
+import SongFinderAppRouter from './067_ReactRouterEjercicios_Buscador_Canciones_con_Rutas_y_localStorage_1_de_5/Components/SongFinder/SongFinderApp';
 
 function App() {
  // const SongFinderStyle1 =
@@ -35,7 +36,8 @@ function App() {
    {/* <CrudApi /> */}
    {/* <SongFinderApp /> */}
    {/* <BaseRouter /> */}
-   <CrudAppIndex2 />
+   {/* <CrudAppIndex2 /> */}
+   <SongFinderAppRouter />
   </div>
  );
 }
